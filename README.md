@@ -243,6 +243,14 @@ Rules:
 - No personal data (API keys, usernames, emails)
 - Include comments explaining *why*, not just *what*
 
+## Also By @unisone
+
+| Project | What It Does | Install |
+|---------|-------------|---------|
+| [intel-skill](https://github.com/unisone/intel-skill) | Market intelligence for Claude Code — gaps, competitors, sentiment, pricing | `npx skills add unisone/intel-skill` |
+| [claude-learner](https://github.com/unisone/claude-learner) | Auto-generate CLAUDE.md improvements from session analysis | `npm install -g claude-learner` |
+| [agentpulse](https://github.com/unisone/agentpulse) | Real-time agent monitoring dashboard | [Live demo](https://dashboard-sandy-zeta-76.vercel.app) |
+
 ## License
 
 MIT
