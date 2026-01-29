@@ -1,0 +1,35 @@
+// Compaction & Pruning — Production-tested settings
+// These values are from the official docs + real-world tuning
+//
+// Key insight: reserveTokensFloor controls WHEN compaction triggers.
+// Higher = earlier compaction = less context but safer from overflow.
+// The default (20000) is fine for most setups.
+// If you're hitting context overflow errors, raise it to 40000-60000.
+//
+// softThresholdTokens controls when the pre-compaction memory flush fires.
+// Keep this at the docs default (4000) — it should fire RIGHT BEFORE
+// compaction, not halfway through your context window.
+
+{
+  agents: {
+    defaults: {
+      // Compaction: summarizes older conversation when context fills up
+      compaction: {
+        mode: "default",
+        reserveTokensFloor: 20000,  // docs default; raise to 60000 if hitting overflow
+        memoryFlush: {
+          enabled: true,             // saves memories to disk before compaction
+          softThresholdTokens: 4000  // docs default — fires close to compaction
+        }
+      },
+
+      // Pruning: trims old tool results from in-memory context per-request
+      // Does NOT rewrite the session transcript on disk
+      contextPruning: {
+        mode: "cache-ttl",
+        ttl: "5m",                   // prune when last API call > 5min ago
+        keepLastAssistants: 3        // protect last 3 assistant messages
+      }
+    }
+  }
+}

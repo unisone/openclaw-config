@@ -1,0 +1,41 @@
+// Discord Channel Setup
+// Replace YOUR_BOT_TOKEN and YOUR_USER_ID with real values
+
+{
+  channels: {
+    discord: {
+      enabled: true,
+      token: "YOUR_DISCORD_BOT_TOKEN",
+      groupPolicy: "allowlist",
+      dm: {
+        policy: "open",
+        allowFrom: ["YOUR_USER_ID"]     // or ["*"] for all DMs
+      },
+      guilds: {
+        "*": {
+          requireMention: false          // respond to all messages in allowed channels
+          // set to true if you want @mention only
+        }
+        // Or per-guild:
+        // "123456789012345678": {
+        //   slug: "my-server",
+        //   requireMention: true,
+        //   channels: {
+        //     general: { allow: true },
+        //     help: { allow: true, requireMention: true }
+        //   }
+        // }
+      }
+    }
+  },
+
+  // Keep Discord sessions alive longer (default resets daily)
+  session: {
+    resetByChannel: {
+      discord: {
+        mode: "idle",
+        idleMinutes: 10080             // 7 days before session reset
+      }
+    }
+  }
+}

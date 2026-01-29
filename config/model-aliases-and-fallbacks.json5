@@ -1,0 +1,24 @@
+// Model Aliases & Fallbacks
+// Aliases let you switch models with /model opus or /model grok
+// Fallbacks ensure you don't just error out if your primary is down
+
+{
+  agents: {
+    defaults: {
+      model: {
+        primary: "anthropic/claude-opus-4-5",
+        fallbacks: [
+          "openai/gpt-4o",
+          "xai/grok-4-latest"
+        ]
+      },
+      models: {
+        "anthropic/claude-opus-4-5": { alias: "opus" },
+        "anthropic/claude-sonnet-4-20250514": { alias: "sonnet" },
+        "openai/gpt-4o": { alias: "gpt" },
+        "xai/grok-4-latest": { alias: "grok" },
+        "openrouter/moonshotai/kimi-k2.5": { alias: "kimi" }
+      }
+    }
+  }
+}
