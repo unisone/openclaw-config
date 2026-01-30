@@ -54,6 +54,10 @@ moltbot-config/
 │   ├── recall.sh             # Context-aware pre-load at session start
 │   ├── self-review.sh        # Extract MISS/FIX pairs from actual errors
 │   └── config.json           # Tuning parameters
+├── content-pipeline/         # Automated content creation pipeline
+│   ├── README.md             # Setup guide + scoring system
+│   ├── CONTENT-PIPELINE-V2.md # Full pipeline spec (crons read this)
+│   └── voice-and-strategy.md # Voice, tone, posting rules
 ├── templates/                # Workspace bootstrap files
 │   ├── AGENTS.md             # Operating instructions + memory protocol
 │   ├── SOUL.md               # Persona, tone, anti-slop rules
@@ -206,6 +210,21 @@ Pre-built personas for multi-agent workflows (Council of the Wise pattern, sub-a
 | **Project Planner** | Scoping, task breakdown, timeline estimation |
 | **Security Auditor** | Threat modeling, config hardening, key rotation |
 | **UX Designer** | Interface design, user flows, accessibility |
+
+---
+
+## Content Pipeline
+
+Automated content creation for X and LinkedIn — 3 crons replace 8+.
+
+```
+SCAN → DRAFT → APPROVE → POST → MEASURE → LEARN
+ 2h      auto    human     auto    3h post    weekly
+```
+
+Topics get scored 1-10 on recency, engagement velocity, pillar relevance, and uniqueness. High scorers auto-draft and go to Discord for human approval. Metrics feed back into scoring weights.
+
+See `content-pipeline/` for the full spec, scoring system, and voice guide.
 
 ---
 
