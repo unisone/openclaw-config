@@ -2,13 +2,36 @@
 
 **Status:** Active (replaces CONTENT-PIPELINE.md)  
 **Last Updated:** 2025-01-30  
-**Database ID:** `YOUR_NOTION_DATABASE_ID`
+**Database ID:** `40e45f2b-e0fc-4e43-948d-4fb38dee9a74`
 
 ## Overview
 
 The Content Pipeline V2 is a fully automated 5-stage content creation, approval, and optimization system. It consolidates the previous x-trend-reactor, x-morning-post, and x-evening-post workflows into a single, intelligent scanning system with continuous learning capabilities.
 
 **Core Principle:** ALL posts require Alex's explicit approval before publishing to any platform.
+
+---
+
+## ⚠️ MANDATORY WORKFLOW — EVERY PIECE OF CONTENT (NO EXCEPTIONS)
+
+**This is the exact sequence. Do not skip steps. Do not reorder.**
+
+```
+1. RESEARCH   → Find 5-10 top-performing posts on the same topic. Study hooks, format, structure, what worked.
+2. DRAFT      → Write draft informed by research. Swiffer test. Visual concept.
+3. NOTION     → Create page in Content Calendar DB (40e45f2b-e0fc-4e43-948d-4fb38dee9a74).
+                 Tag: Status=Draft, Platform, Pillar, Hook Style, Format, Length, Topic.
+                 Notion is the SINGLE SOURCE OF TRUTH. Not local markdown files.
+4. REVIEW     → Post Notion link to Discord #content. Show exact draft text. Wait for explicit approval.
+5. POST       → Only after "yes" / "approved" / "ship it". Optimal time. Engage comments <15 min.
+6. MEASURE    → Metrics back into same Notion page at 24h + 7d.
+```
+
+**Common violations (DO NOT REPEAT):**
+- ❌ Drafting before researching top performers
+- ❌ Saving drafts as local markdown instead of Notion
+- ❌ Showing draft without Notion link
+- ❌ Skipping research phase because "we already know the topic"
 
 ---
 
@@ -95,7 +118,7 @@ Each discovered topic gets scored based on 4 factors:
    - Add research links and context
 
 3. **Discord Notification:**
-   - Send draft to #content channel (ID: `YOUR_DISCORD_CHANNEL_ID`)
+   - Send draft to #content channel (ID: `1466528839575535831`)
    - Include Notion row link
    - Store Discord message ID in Notion row
 
@@ -151,7 +174,7 @@ Each discovered topic gets scored based on 4 factors:
 ### Metrics Collection
 
 1. **Data Source:**
-   - `bird user-tweets YOUR_X_HANDLE` for X posts
+   - `bird user-tweets @alexxzay` for X posts
    - LinkedIn API for LinkedIn posts
 
 2. **Tracked Metrics:**
@@ -213,7 +236,7 @@ Each discovered topic gets scored based on 4 factors:
 
 ## NOTION DATABASE SCHEMA
 
-**Database ID:** `YOUR_NOTION_DATABASE_ID`
+**Database ID:** `40e45f2b-e0fc-4e43-948d-4fb38dee9a74`
 
 ### Core Properties
 
