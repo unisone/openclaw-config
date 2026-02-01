@@ -1,4 +1,4 @@
-# moltbot-config
+# openclaw-config
 
 > Production configs, memory scripts, and workspace templates for **OpenClaw** (formerly Moltbot/Clawdbot) — built from real daily usage, not theory.
 >
@@ -28,11 +28,11 @@ OpenClaw was previously called **Moltbot** and **Clawdbot**. Some paths and file
 
 ```bash
 # Clone into your OpenClaw workspace
-git clone https://github.com/unisone/moltbot-config.git
-cp -r moltbot-config/scripts/memory-engine/ /path/to/workspace/scripts/memory-engine/
-cp -r moltbot-config/templates/* /path/to/workspace/
-cp -r moltbot-config/agents/ /path/to/workspace/agents/
-cp -r moltbot-config/config/ /path/to/workspace/docs/config-examples/
+git clone https://github.com/unisone/openclaw-config.git
+cp -r openclaw-config/scripts/memory-engine/ /path/to/workspace/scripts/memory-engine/
+cp -r openclaw-config/templates/* /path/to/workspace/
+cp -r openclaw-config/agents/ /path/to/workspace/agents/
+cp -r openclaw-config/config/ /path/to/workspace/docs/config-examples/
 
 # Make scripts executable
 chmod +x /path/to/workspace/scripts/memory-engine/*.sh
@@ -49,7 +49,7 @@ bash scripts/memory-engine/recall.sh "your query here"
 ## What's Inside
 
 ```
-moltbot-config/
+openclaw-config/
 ├── docs/                     # Comprehensive analysis and guides
 │   └── context-overflow-prevention.md  # Root cause analysis + all config options
 ├── scripts/memory-engine/    # Memory scoring, decay, self-review
