@@ -12,7 +12,7 @@ const path = require('path');
 const { Client, GatewayIntentBits, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 const PORT = process.env.APPROVAL_PORT || 18790;
-const DISCORD_TOKEN = process.env.DISCORD_BOT_TOKEN; // Will read from Clawdbot config if not set
+const DISCORD_TOKEN = process.env.DISCORD_BOT_TOKEN; // Will read from OpenClaw config if not set
 const DEV_CHANNEL_ID = '1466528903815499997';
 const LOGS_DIR = path.join(__dirname, 'logs');
 const TOKENS_FILE = path.join(__dirname, 'approval-tokens.json');
@@ -89,11 +89,11 @@ class ApprovalServer {
   }
 
   async setupDiscord() {
-    // Read Discord token from Clawdbot config if not in env
+    // Read Discord token from OpenClaw config if not in env
     const discordToken = DISCORD_TOKEN || await this.getDiscordTokenFromConfig();
     
     if (!discordToken) {
-      console.error('❌ Discord token not found. Set DISCORD_BOT_TOKEN or ensure Clawdbot config has Discord token.');
+      console.error('❌ Discord token not found. Set DISCORD_BOT_TOKEN or ensure OpenClaw config has Discord token.');
       process.exit(1);
     }
 
@@ -119,15 +119,25 @@ class ApprovalServer {
   }
 
   async getDiscordTokenFromConfig() {
-    try {
-      const configPath = path.join(process.env.HOME, '.clawdbot', 'clawdbot.json');
-      const configData = await fs.readFile(configPath, 'utf8');
-      const config = JSON.parse(configData);
-      return config.channels?.discord?.token;
-    } catch (error) {
-      console.warn('Could not read Discord token from Clawdbot config:', error.message);
-      return null;
+    const candidates = [
+      path.join(process.env.HOME, '.openclaw', 'openclaw.json'),
+      path.join(process.env.HOME, '.clawdbot', 'clawdbot.json'),
+      path.join(process.env.HOME, '.clawdbot', 'moltbot.json'),
+    ];
+
+    for (const configPath of candidates) {
+      try {
+        const configData = await fs.readFile(configPath, 'utf8');
+        const config = JSON.parse(configData);
+        const token = config.channels?.discord?.token;
+        if (token) return token;
+      } catch (error) {
+        // keep trying
+      }
     }
+
+    console.warn('Could not read Discord token from OpenClaw config (tried: ' + candidates.join(', ') + ')');
+    return null;
   }
 
   async createApprovalRequest(data) {

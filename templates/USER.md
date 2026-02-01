@@ -4,7 +4,7 @@
 - **What to call them:** *(preferred name)*
 - **Pronouns:** *(optional)*
 - **Timezone:** *(e.g., America/New_York)*
-- **Notes:** *(how you run Moltbot — channels, platforms, etc.)*
+- **Notes:** *(how you run OpenClaw — channels, platforms, etc.)*
 
 ## Working Style
 - *(What do you value? Speed? Thoroughness? Autonomy?)*

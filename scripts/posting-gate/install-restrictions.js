@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Install posting restrictions in Clawdbot gateway configuration
+ * Install posting restrictions in OpenClaw gateway configuration
  * This makes it physically impossible to post to social media without approval
  */
 
@@ -9,7 +9,21 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const CONFIG_PATH = path.join(os.homedir(), '.clawdbot', 'clawdbot.json');
+// OpenClaw config path (Jan 2026+). Keep legacy fallbacks for older installs.
+const CONFIG_PATHS = [
+  path.join(os.homedir(), '.openclaw', 'openclaw.json'),
+  path.join(os.homedir(), '.clawdbot', 'clawdbot.json'),
+  path.join(os.homedir(), '.clawdbot', 'moltbot.json'),
+];
+
+function resolveConfigPath() {
+  for (const p of CONFIG_PATHS) {
+    if (fs.existsSync(p)) return p;
+  }
+  return CONFIG_PATHS[0];
+}
+
+const CONFIG_PATH = resolveConfigPath();
 const BACKUP_PATH = CONFIG_PATH + '.backup.' + Date.now();
 
 // Platforms that require approval for posting
@@ -19,7 +33,7 @@ const RESTRICTED_PLATFORMS = [
 
 function loadConfig() {
   if (!fs.existsSync(CONFIG_PATH)) {
-    console.error('❌ Clawdbot config not found at:', CONFIG_PATH);
+    console.error('❌ OpenClaw config not found. Looked for:', CONFIG_PATHS.join(', '));
     process.exit(1);
   }
   
@@ -27,7 +41,7 @@ function loadConfig() {
     const configData = fs.readFileSync(CONFIG_PATH, 'utf8');
     return JSON.parse(configData);
   } catch (error) {
-    console.error('❌ Failed to parse Clawdbot config:', error.message);
+    console.error('❌ Failed to parse OpenClaw config:', error.message);
     process.exit(1);
   }
 }
@@ -151,9 +165,9 @@ function main() {
     console.log('\n✅ Posting restrictions installed successfully!');
     console.log('📄 Backup saved to:', backupPath);
     console.log('\n🚀 Next steps:');
-    console.log('   1. Restart Clawdbot gateway: clawdbot gateway restart');
+    console.log('   1. Restart OpenClaw gateway: openclaw gateway restart');
     console.log('   2. Start approval server: node approval-server.js');
-    console.log('   3. Test with: echo "test" | clawdbot message send --target twitter');
+    console.log('   3. Test by attempting a post via your OpenClaw message tool');
     
   } catch (error) {
     console.error('❌ Installation failed:', error.message);

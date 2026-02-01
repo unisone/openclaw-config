@@ -90,7 +90,7 @@ moltbot-config/
 
 ## Memory Engine
 
-The default Moltbot memory is append-only markdown files. This engine adds scoring, decay, pattern detection, and self-correction on top.
+The default OpenClaw memory is append-only markdown files. This engine adds scoring, decay, pattern detection, and self-correction on top.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -270,10 +270,10 @@ No tests yet — contributions welcome.
 
 ## Contributing
 
-PRs welcome. If you've built a config, script, or template that improved your Moltbot setup, share it.
+PRs welcome. If you've built a config, script, or template that improved your OpenClaw setup, share it.
 
 Rules:
-- Must be tested in a real Moltbot workspace
+- Must be tested in a real OpenClaw workspace
 - No personal data (API keys, usernames, emails)
 - Include comments explaining *why*, not just *what*
 

@@ -11,7 +11,21 @@ const axios = require('axios');
 const { spawn } = require('child_process');
 
 const APPROVAL_SERVER_URL = 'http://localhost:18790';
-const CONFIG_PATH = path.join(process.env.HOME, '.clawdbot', 'clawdbot.json');
+const CONFIG_PATHS = [
+  path.join(process.env.HOME, '.openclaw', 'openclaw.json'),
+  path.join(process.env.HOME, '.clawdbot', 'clawdbot.json'),
+  path.join(process.env.HOME, '.clawdbot', 'moltbot.json'),
+];
+
+function resolveConfigPath() {
+  const fs = require('fs');
+  for (const p of CONFIG_PATHS) {
+    if (fs.existsSync(p)) return p;
+  }
+  return CONFIG_PATHS[0];
+}
+
+const CONFIG_PATH = resolveConfigPath();
 
 class SystemTester {
   constructor() {
@@ -53,7 +67,7 @@ class SystemTester {
     try {
       // Check if config file exists
       if (!fs.existsSync(CONFIG_PATH)) {
-        this.addResult('Config File', false, 'Clawdbot config not found');
+        this.addResult('Config File', false, `OpenClaw config not found (looked for: ${CONFIG_PATHS.join(', ')})`);
         return;
       }
       
@@ -244,7 +258,7 @@ class SystemTester {
     if (passed === total) {
       console.log('\n🎉 All tests passed! Approval gate system is ready.');
       console.log('\n🚀 Next steps:');
-      console.log('   1. Restart Clawdbot gateway: clawdbot gateway restart');
+      console.log('   1. Restart OpenClaw gateway: openclaw gateway restart');
       console.log('   2. Test with actual posting attempt');
     } else {
       console.log('\n⚠️  Some tests failed. Check configuration and try again.');

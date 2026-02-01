@@ -14,10 +14,22 @@ if [[ ! -f "package.json" ]]; then
     exit 1
 fi
 
-# Check if Clawdbot config exists
-if [[ ! -f "$HOME/.clawdbot/clawdbot.json" ]]; then
-    echo "❌ Error: Clawdbot configuration not found at $HOME/.clawdbot/clawdbot.json"
-    echo "   Make sure Clawdbot is installed and configured first."
+# Check if OpenClaw config exists (with legacy fallbacks)
+CONFIG_CANDIDATES=(
+  "$HOME/.openclaw/openclaw.json"
+  "$HOME/.clawdbot/clawdbot.json"
+  "$HOME/.clawdbot/moltbot.json"
+)
+
+CONFIG_PATH=""
+for p in "${CONFIG_CANDIDATES[@]}"; do
+  if [[ -f "$p" ]]; then CONFIG_PATH="$p"; break; fi
+done
+
+if [[ -z "$CONFIG_PATH" ]]; then
+    echo "❌ Error: OpenClaw configuration not found. Looked for:"
+    printf '   - %s\n' "${CONFIG_CANDIDATES[@]}"
+    echo "   Make sure OpenClaw is installed and configured first."
     exit 1
 fi
 
@@ -31,9 +43,9 @@ fi
 echo "📦 Installing dependencies..."
 npm install
 
-# Backup current Clawdbot config
-echo "📄 Backing up Clawdbot configuration..."
-cp "$HOME/.clawdbot/clawdbot.json" "$HOME/.clawdbot/clawdbot.json.backup.$(date +%s)"
+# Backup current OpenClaw config
+echo "📄 Backing up OpenClaw configuration ($CONFIG_PATH)..."
+cp "$CONFIG_PATH" "$CONFIG_PATH.backup.$(date +%s)"
 
 # Install gateway restrictions
 echo "⚙️  Installing gateway restrictions..."
@@ -52,7 +64,7 @@ if command -v systemctl &> /dev/null; then
     echo "🔧 Creating systemd service file..."
     cat > /tmp/clawdbot-approval-gate.service << EOF
 [Unit]
-Description=Clawdbot Posting Approval Gate
+Description=OpenClaw Posting Approval Gate
 After=network.target
 
 [Service]
@@ -88,7 +100,7 @@ if [[ $? -eq 0 ]]; then
     echo "✅ Installation complete! The AI agent posting approval gate is now active."
     echo ""
     echo "🚀 Next steps:"
-    echo "   1. Restart Clawdbot gateway: clawdbot gateway restart"
+    echo "   1. Restart OpenClaw gateway: openclaw gateway restart"
     echo "   2. Start approval server: npm start"
     echo "   3. Test posting: echo 'test' | node approved-message-tool.js --target twitter"
     echo ""
