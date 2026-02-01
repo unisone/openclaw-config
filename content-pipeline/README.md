@@ -1,6 +1,6 @@
 # Content Pipeline
 
-Automated content creation pipeline for X and LinkedIn using Moltbot cron jobs + Notion as the single source of truth.
+Automated content creation pipeline for X and LinkedIn using **OpenClaw** cron jobs + Notion as the single source of truth. (Formerly Moltbot/Clawdbot.)
 
 ## How It Works
 

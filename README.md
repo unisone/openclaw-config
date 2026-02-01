@@ -1,6 +1,8 @@
 # moltbot-config
 
-> Production configs, memory scripts, and workspace templates for [Moltbot](https://github.com/moltbot/moltbot) — built from real daily usage, not theory.
+> Production configs, memory scripts, and workspace templates for **OpenClaw** (formerly Moltbot/Clawdbot) — built from real daily usage, not theory.
+>
+> Upstream repo: https://github.com/openclaw/openclaw
 
 Every file in this repo is running in production right now. If it's here, it works.
 
@@ -8,21 +10,24 @@ Every file in this repo is running in production right now. If it's here, it wor
 
 ## Why This Exists
 
-Moltbot ships with sane defaults, but the default setup has gaps:
+OpenClaw ships with sane defaults, but the default setup has gaps:
 
 - **Memory is flat files** — no scoring, no decay, no pattern detection
 - **No self-correction loop** — the agent repeats the same mistakes across sessions
 - **Compaction is lossy** — important context vanishes when the window fills up
 - **Config docs are scattered** — hard to know which settings actually matter
 
-This repo fixes all of that with tested scripts and configs you can drop into any Moltbot workspace.
+This repo fixes all of that with tested scripts and configs you can drop into any OpenClaw workspace.
+
+## Naming Note (Jan 2026)
+OpenClaw was previously called **Moltbot** and **Clawdbot**. Some paths and filenames in this repo (and in older blog posts) may still use the old names. Where possible, docs below show the **current OpenClaw paths** and mention legacy ones when people might still have them.
 
 ---
 
 ## Quickstart
 
 ```bash
-# Clone into your Moltbot workspace
+# Clone into your OpenClaw workspace
 git clone https://github.com/unisone/moltbot-config.git
 cp -r moltbot-config/scripts/memory-engine/ /path/to/workspace/scripts/memory-engine/
 cp -r moltbot-config/templates/* /path/to/workspace/
@@ -149,7 +154,7 @@ chmod +x ~/clawd/scripts/memory-engine/*.sh
 # Run the full nightly cycle manually
 bash ~/clawd/scripts/memory-engine/learn.sh
 
-# Or set up a Moltbot cron job (runs at 3 AM daily)
+# Or set up an OpenClaw cron job (runs at 3 AM daily)
 # The learn.sh script chains: capture → decay → self-review → insights
 ```
 
@@ -165,7 +170,11 @@ Add to your `HEARTBEAT.md`:
 
 ## Gateway Config Snippets
 
-Drop these into your `~/.clawdbot/moltbot.json`. Each file is standalone — use what you need.
+Drop these into your OpenClaw config at `~/.openclaw/openclaw.json`.
+
+(Legacy installs sometimes used `~/.clawdbot/clawdbot.json` or `~/.clawdbot/moltbot.json`.)
+
+Each file is standalone — use what you need.
 
 ### Compaction & Pruning
 The most impactful settings for context management. **Updated from production analysis** with `reserveTokensFloor: 60000` (was 20000) and aggressive context pruning (`cache-ttl: 2m`, tool-targeted pruning). Key insight: `reserveTokensFloor` controls when compaction triggers. `softThresholdTokens` controls when pre-compaction memory flush fires — keep it at the docs default (4000).
