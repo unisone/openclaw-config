@@ -34,7 +34,7 @@ The agent calls a Lobster pipeline. Lobster halts at the `approve` step and retu
 - ✅ **Resume tokens** — cryptographic tokens required to continue past approval gate
 - ✅ **Audit trail** — every post attempt logged with timestamp, content, result
 - ✅ **Platform extensible** — X, LinkedIn, any future platform
-- ✅ **Native Clawdbot integration** — uses built-in Lobster tool, not custom middleware
+- ✅ **Native OpenClaw integration** — uses Lobster workflows, not custom middleware
 
 ## Files
 

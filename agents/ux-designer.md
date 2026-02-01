@@ -429,7 +429,7 @@ uv run ~/.codex/skills/nano-banana-pro/scripts/generate_image.py \
 ### Design Review
 
 ```bash
-# Via Clawdbot
+# Via OpenClaw
 sessions_spawn({
   task: `Design Review: [SCREEN/FEATURE]
 

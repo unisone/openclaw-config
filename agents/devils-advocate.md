@@ -302,6 +302,6 @@ Remember: The goal is to make this idea STRONGER, not kill it. Every criticism n
 ---
 
 **Created:** 2026-01-28  
-**Author:** Clawdbot  
+**Author:** OpenClaw  
 **Version:** 1.0  
 **Sources:** US Army Red Team methodology, Gary Klein's Pre-Mortem, Daniel Kahneman on cognitive bias, Minto Pyramid principle
