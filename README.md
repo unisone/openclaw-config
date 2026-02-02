@@ -1,6 +1,6 @@
 # openclaw-config
 
-Battle-tested configs, scripts, and workspace templates for **OpenClaw / Moltbot (Clawdbot)**.
+Battle-tested configs, scripts, and workspace templates for **OpenClaw**.
 
 - Upstream: https://github.com/openclaw/openclaw
 - This repo is **not** an SDK or plugin - it's a set of *copyable* building blocks.
