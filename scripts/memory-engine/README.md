@@ -13,10 +13,11 @@
 | Script | Purpose | When |
 |--------|---------|------|
 | `capture.sh` | Extract memories from daily files | Every heartbeat |
-| `recall.sh` | Keyword-weighted retrieval | On demand |
 | `decay.sh` | Time-based relevance decay | Nightly 3AM |
 | `learn.sh` | Pattern detection + promotion | Nightly after decay |
 | `self-review.sh` | Error/correction extraction | Nightly |
+
+**Note:** Recall (stage 2) is handled by OpenClaw's built-in `memory_search` tool, not a custom script. The agent calls it automatically when searching for context.
 
 ## Quick Start
 
@@ -41,9 +42,11 @@ See `config.json` for category weights and decay settings.
 
 ## How It Works
 
-1. **Capture** — Scans daily logs, extracts structured memories with categories
-2. **Recall** — Searches with keyword + category weighting (corrections surface first)
-3. **Decay** — Memories lose relevance over time (14-day half-life)
-4. **Learn** — Promotes repeated corrections to permanent rules
+1. **Capture** (custom script) — Scans daily logs, extracts structured memories with categories
+2. **Recall** (OpenClaw built-in) — Agent calls `memory_search` for semantic similarity search
+3. **Decay** (custom script) — Memories lose relevance over time (14-day half-life)
+4. **Learn** (custom script) — Promotes repeated corrections to permanent rules
+
+Category weights affect capture scoring and decay rates. Higher-weighted categories (corrections, decisions) persist longer and surface more reliably.
 
 This solves "context rot" — old info naturally fades, important info (recalled frequently) stays fresh.
