@@ -37,7 +37,7 @@ if [ -z "$QUERY" ]; then
   ' "$STORE"
 else
   # Query-based — simple keyword matching + score weighting
-  echo "   Mode: keyword-weighted (query: $QUERY)"
+  echo "   Mode: semantic (query: $QUERY)"
   
   # Split query into keywords
   KEYWORDS=$(echo "$QUERY" | tr '[:upper:]' '[:lower:]' | tr -cs '[:alnum:]' '\n' | sort -u | tr '\n' '|' | sed 's/|$//')

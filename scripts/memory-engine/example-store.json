@@ -1,0 +1,46 @@
+{
+  "memories": [
+    {
+      "category": "people",
+      "content": "GitHub: unisone...",
+      "score": 0.9141249999999999,
+      "keywords": null
+    },
+    {
+      "category": "people",
+      "content": "Twitter: @alexxzay...",
+      "score": 0.9141249999999999,
+      "keywords": null
+    },
+    {
+      "category": "people",
+      "content": "Email: hello@zaydream.com...",
+      "score": 0.9141249999999999,
+      "keywords": null
+    },
+    {
+      "category": "preference",
+      "content": "Has GitHub Sponsors set up, wants to monetize prom...",
+      "score": 1.3612080000000002,
+      "keywords": null
+    },
+    {
+      "category": "fact",
+      "content": "Added .github/FUNDING.yml...",
+      "score": 0.9141249999999999,
+      "keywords": null
+    }
+  ],
+  "meta": {
+    "note": "Example store - 252 memories in production",
+    "categories": [
+      "fact",
+      "correction",
+      "decision",
+      "project",
+      "people",
+      "preference",
+      "todo"
+    ]
+  }
+}

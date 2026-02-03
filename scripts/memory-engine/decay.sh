@@ -44,8 +44,8 @@ jq --argjson halfLife "$HALF_LIFE" \
       (.[0] | tonumber) * 365 + (.[1] | tonumber) * 30 + (.[2] | tonumber)) as $todayDay |
      ($todayDay - $accessDay) as $daysSince |
      
-     # Stepped approximation of exponential decay (continuous math not available in jq)
-     # Close enough for memory scoring — exact precision doesn't matter here
+     # Exponential decay approximation: score * (1 - ln2/halfLife)^days
+     # Using iterative halving: each halfLife period halves the score
      (if $daysSince > 0 then
        ($daysSince / $halfLife) as $periods |
        .score * (if $periods >= 4 then 0.0625
@@ -60,10 +60,10 @@ jq --argjson halfLife "$HALF_LIFE" \
      end) as $newScore |
      
      # Apply category boost (corrections and decisions decay slower)
-     (if .category == "correction" then ($newScore * 2.0)
-      elif .category == "decision" then ($newScore * 1.8)
-      elif .category == "preference" then ($newScore * 1.5)
-      elif .category == "person" then ($newScore * 1.6)
+     (if .category == "correction" then ($newScore * 1.5)
+      elif .category == "decision" then ($newScore * 1.3)
+      elif .category == "preference" then ($newScore * 1.2)
+      elif .category == "person" then ($newScore * 1.4)
       else $newScore
       end) as $boostedScore |
      
