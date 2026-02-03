@@ -94,7 +94,7 @@ while IFS= read -r line; do
       CAT="todo"
     elif echo "$LOWER" | grep -qiE "(repo:|stack:|built[[:space:]]|shipped|deployed|pr[[:space:]]#|pr[[:space:]][0-9]|github\.com|vercel\.app|launched|published)"; then
       CAT="project"
-    elif echo "$LOWER" | grep -qiE "(@[a-z]|username|contact|email:|twitter:|github:|linkedin:|phone:)" || echo "$CLEAN" | grep -qE "([A-Z][a-z]+ [A-Z][a-z]+)"; then
+    elif echo "$LOWER" | grep -qiE "(@[a-z]|username|contact|email:|twitter:|github:|linkedin:|phone:)" || echo "$CLEAN" | grep -qE "(Alex|Dan[[:space:]]|[A-Z][a-z]+ [A-Z][a-z]+)"; then
       CAT="people"
     elif echo "$LOWER" | grep -qiE "(learned|realized|key insight|important:|note:|takeaway|pattern:)"; then
       CAT="insight"
