@@ -17,11 +17,23 @@ Battle-tested configs, scripts, and workspace templates for **OpenClaw**.
 **🚀 New Config Examples:**
 - **`pro-optimization.json5`** - Production-tuned power user settings (the "dial it to 11" config)
 - **`feature-unlocks.json5`** - Enable the "60% to 100%" features that ship disabled by default
+- **`memory-lancedb-setup.json5`** - LanceDB-backed long-term memory with auto-capture/recall
+- **`web-search-perplexity.json5`** - Switch from Brave to Perplexity (no rate limits)
+
+**📚 New Docs:**
+- **`diagnosis-protocol.md`** - Check tools before recommending workarounds
+- **`context-overflow-prevention.md`** - Rules for spawning sub-agents under heavy load
+
+**🛠️ New Scripts:**
+- **`post-update-macos-arm64.sh`** - Reinstall native dependencies after `npm update`
 
 **📊 Updated with Real Production Values:**
-- **Compaction & Pruning** - Updated with actual running config: `reserveTokensFloor: 40000`, `softThresholdTokens: 120000`, `minPrunableToolChars: 50000`
+- **Compaction & Pruning** - Updated with actual running config: `reserveTokensFloor: 20000`, `softThresholdTokens: 8000`
 - **Context Overflow Prevention** - Balanced production settings (not aggressive test config)
 - **Model Setup** - Current production model stack: Opus primary, Sonnet + GPT-5.2 fallbacks, Kimi for subagents
+- **Memory Recall** - Increased to 6 results per context (0.4% of window, better continuity)
+- **Cron Concurrency** - Increased to 5 (morning window has overlapping jobs)
+- **Subagent Thinking** - Changed to "high" (subagents do real work)
 
 **Why These Matter:**
 OpenClaw ships conservative by default - it prioritizes "just works" over "maximum power." The new configs represent stable, production-tested optimizations that power users want but newcomers don't need to think about. Not experimental. Not bleeding edge. Just the settings that work when you know what you're doing.
@@ -91,6 +103,8 @@ Start here:
 - `config/context-overflow-prevention.json5` — defensive settings for heavy tool use
 - `config/model-aliases-and-fallbacks.json5` — provider fallbacks
 - `config/memory-search.json5` — semantic search over memory files
+- `config/memory-lancedb-setup.json5` — LanceDB + OpenAI embeddings + auto-capture/recall
+- `config/web-search-perplexity.json5` — Perplexity search (no rate limits with paid key)
 - `config/discord-setup.json5` — practical Discord defaults
 
 ### Power User Configs (NEW)

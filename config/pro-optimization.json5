@@ -22,21 +22,34 @@
 
   // Cron job management
   cron: {
-    maxConcurrentRuns: 3         // Allow 3 cron jobs to run simultaneously
+    maxConcurrentRuns: 5         // Allow 5 cron jobs to run simultaneously
+                                  // (up from 3 — morning window has overlapping jobs)
   },
 
   agents: {
     defaults: {
-      // Subagent lifecycle — clean up after 1 hour
+      // Subagent configuration — critical for parallel work
       subagents: {
-        archiveAfterMinutes: 60  // Production: archive subagents after 60min idle
+        maxConcurrent: 8,            // Allow 8 concurrent subagents
+        archiveAfterMinutes: 60,     // Archive subagents after 60min idle
+        thinking: "high"             // Subagents do real work — give them thinking budget
       },
 
-      // Default thinking mode
+      // Default thinking mode for main sessions
       thinkingDefault: "low",    // Low thinking for speed, use /reasoning when needed
 
       // Request timeout
-      timeoutSeconds: 300        // 5-minute timeout for long-running operations
+      timeoutSeconds: 300,       // 5-minute timeout for long-running operations
+
+      // Memory search optimization
+      memorySearch: {
+        query: {
+          maxResults: 6          // 6 memories per context (~800 tokens, 0.4% of window)
+        }
+      },
+
+      // Concurrent main agent sessions
+      maxConcurrent: 4           // Allow 4 concurrent main agent sessions
     }
   },
 
@@ -48,6 +61,14 @@
       },
       fetch: {
         cacheTtlMinutes: 10      // Cache fetched pages for 10 minutes
+      }
+    },
+    // Elevated exec — allow trusted users to run host commands
+    elevated: {
+      enabled: true,
+      allowFrom: {
+        discord: ["YOUR_DISCORD_USER_ID"],   // Replace with your ID
+        whatsapp: []
       }
     }
   },
