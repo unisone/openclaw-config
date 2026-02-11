@@ -1,16 +1,17 @@
 # USER.md - About Your Human
 
-- **Name:** *(your name)*
-- **What to call them:** *(preferred name)*
-- **Pronouns:** *(optional)*
-- **Timezone:** *(e.g., America/New_York)*
-- **Notes:** *(how you run OpenClaw — channels, platforms, etc.)*
+*Learn about the person you're helping. Update this as you go.*
 
-## Working Style
-- *(What do you value? Speed? Thoroughness? Autonomy?)*
-- *(What do you dislike? Filler words? Asking obvious questions?)*
-- *(When uncertain: try first or ask first?)*
+- **Name:** 
+- **What to call them:** 
+- **Pronouns:** *(optional)*
+- **Timezone:** 
+- **Notes:** 
+
+## Context
+
+*(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)*
 
 ---
 
-The more you know, the better you can help. But remember — you're learning about a person, not building a dossier.
+The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.

@@ -8,9 +8,33 @@ Battle-tested configs, scripts, and workspace templates for **OpenClaw**.
 ## What you get
 
 - **Memory Engine** (`scripts/memory-engine/`): capture → recall → decay → learn (nightly) + self-review (MISS/FIX) from real logs
+- **Task Runner** (`scripts/taskrunner/`): Python-based task automation with retry logic, locking, and structured logging
 - **Gateway config snippets** (`config/*.json5`): compaction, pruning, model fallbacks, Discord setup, memory search
-- **Workspace templates** (`templates/`): `AGENTS.md`, `SOUL.md`, `HEARTBEAT.md`, etc.
+- **Workspace templates** (`templates/`): `AGENTS.md`, `SOUL.md`, `HEARTBEAT.md`, `IDENTITY.md`, `USER.md`
+- **Docs** (`docs/`): Deep operational guides (session context overflow, agent memory research)
 - **Optional content pipeline** (`content-pipeline/`): cron-driven draft → approval → post → metrics loop
+
+## What's New (Feb 11, 2026)
+
+**🔥 Major Template Overhaul:**
+- **`AGENTS.md`** - Expanded with heartbeat system, group chat etiquette, emoji reactions, memory maintenance, cron vs heartbeat guidance, platform formatting rules, and voice storytelling tips (~220 lines)
+- **`HEARTBEAT.md`** - Rewritten to focused operational format with quick checks (daily memory file, cron health, inbox/calendar rotation)
+- **`IDENTITY.md`** - Added avatar and creature fields for agent personalization
+- **`SOUL.md`** - Refined and polished core agent philosophy
+
+**🐍 New: Python Task Runner** (`scripts/taskrunner/`)
+- Replace fragile shell scripts with Python-based task automation
+- Built-in retry logic with exponential backoff
+- File locking to prevent concurrent runs
+- Structured JSON logging (`logs/tasks.jsonl`)
+- Alert system for heartbeat integration (`alerts/pending.json`)
+- Example tasks: `memory_capture`, `memory_consolidate`, `system_health`
+
+**📚 New Agent Research Docs:**
+- **`docs/session-context-overflow-fix.md`** - Complete operational guide for preventing and fixing context window overflow (research, analysis, layered defense strategy)
+- **`docs/agent-system-research.md`** - Comprehensive research report on memory systems, tiered memory, consolidation, proactive behavior, self-improvement (4500+ words, 31 citations)
+
+---
 
 ## What's New (Feb 2026)
 
@@ -56,7 +80,7 @@ These files are meant to be copied into your workspace, which means you should t
 
 ## Quickstart (recommended)
 
-Pick only what you want. Most people start with **templates + memory engine**.
+Pick only what you want. Most people start with **templates + memory engine** or **templates + task runner**.
 
 ```bash
 # 1) Clone
@@ -67,16 +91,23 @@ cd openclaw-config
 # Replace ~/clawd with your OpenClaw workspace path.
 rsync -av templates/ ~/clawd/
 
-# 3) Copy the memory engine
+# 3) Option A: Copy the memory engine (shell-based)
 mkdir -p ~/clawd/scripts/
 rsync -av scripts/memory-engine/ ~/clawd/scripts/memory-engine/
 chmod +x ~/clawd/scripts/memory-engine/*.sh
 
-# 4) Run an initial capture (creates/updates memory/store.json)
+# 3) Option B: Copy the task runner (Python-based, recommended)
+rsync -av scripts/taskrunner/ ~/clawd/scripts/taskrunner/
+
+# 4) Run an initial capture
+# Memory engine:
 cd ~/clawd
 bash scripts/memory-engine/capture.sh
 
-# 5) Try recall
+# Task runner:
+python3 ~/clawd/scripts/taskrunner/runner.py memory_capture
+
+# 5) Try recall (memory engine only)
 bash scripts/memory-engine/recall.sh "context overflow"
 ```
 
@@ -145,9 +176,13 @@ openclaw-config/
   agents/               # Multi-agent persona prompts
   config/               # JSON5 snippets you can merge into your gateway config
   content-pipeline/     # Optional: cron-driven content workflow
-  docs/                 # Deep dives (e.g., context overflow prevention)
-  scripts/memory-engine/# Capture/recall/decay/learn + self-review
-  templates/            # Workspace bootstrap files
+  docs/                 # Deep operational guides
+    ├── session-context-overflow-fix.md    # Prevent/fix context overflow
+    └── agent-system-research.md           # Memory systems research report
+  scripts/
+    ├── memory-engine/  # Shell-based capture/recall/decay/learn + self-review
+    └── taskrunner/     # Python task automation with retry/locking/logging
+  templates/            # Workspace bootstrap files (AGENTS.md, SOUL.md, etc.)
   workflows/            # Optional Lobster workflows
 ```
 
