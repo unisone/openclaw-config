@@ -10,9 +10,34 @@ Battle-tested configs, scripts, and workspace templates for **OpenClaw**.
 - **Memory Engine** (`scripts/memory-engine/`): capture → recall → decay → learn (nightly) + self-review (MISS/FIX) from real logs
 - **Task Runner** (`scripts/taskrunner/`): Python-based task automation with retry logic, locking, and structured logging
 - **Gateway config snippets** (`config/*.json5`): compaction, pruning, model fallbacks, Discord setup, memory search
-- **Workspace templates** (`templates/`): `AGENTS.md`, `SOUL.md`, `HEARTBEAT.md`, `IDENTITY.md`, `USER.md`
-- **Docs** (`docs/`): Deep operational guides (session context overflow, agent memory research)
+- **Workspace templates** (`templates/`): `AGENTS.md`, `SOUL.md`, `HEARTBEAT.md`, `STATE.md`, `IDENTITY.md`, `USER.md`, `artifacts/`
+- **Skill routing overrides** (`skills/`): Workspace-level SKILL.md overrides that reduce misfires in overlapping domains (email, notes, transcription, messaging)
+- **Docs** (`docs/`): Deep operational guides (session context overflow, agent memory research, skill routing)
 - **Optional content pipeline** (`content-pipeline/`): cron-driven draft → approval → post → metrics loop
+
+## What's New (Feb 12, 2026)
+
+**🎯 Skill Routing Overrides** (`skills/`)
+- Workspace-level SKILL.md overrides for 11 skills across 6 overlapping domains
+- Each override adds "Don't use for..." negative examples to reduce misfires
+- Based on OpenAI's "Shell + Skills + Compaction" guidance (Glean saw 20% misfire reduction)
+- Covers: email (gog/himalaya), notes (apple-notes/bear/obsidian/notion), transcription (whisper/whisper-api), messaging (imsg), code (coding-agent), summarize
+- Full audit report and documentation in `docs/skill-routing-improvements.md`
+
+**🔄 STATE.md — Live Working Context** (new template)
+- Short-term memory that survives compaction and session resets
+- Max 3KB, auto-pruned during heartbeats
+- Priority markers (🔴 ACTIVE / 🟡 WAITING / ⚪ DONE)
+- Loaded every session alongside SOUL.md, USER.md, and MEMORY.md
+
+**📁 Artifacts Convention** (`templates/artifacts/`)
+- Structured output directory for agent-generated reports, code, data, images
+- Pattern: Tools write to disk → Models reason over disk → Developers retrieve from disk
+
+**📝 Template Improvements:**
+- **`AGENTS.md`** — Added STATE.md integration, artifacts convention, "Write It Down" mandate
+- **`HEARTBEAT.md`** — Added STATE.md maintenance, self-improvement rotation, ClawHub/GitHub checks
+- **`SOUL.md`** — Added Growth section: research better approaches, identify inefficiencies, propose improvements
 
 ## What's New (Feb 11, 2026)
 
@@ -178,11 +203,14 @@ openclaw-config/
   content-pipeline/     # Optional: cron-driven content workflow
   docs/                 # Deep operational guides
     ├── session-context-overflow-fix.md    # Prevent/fix context overflow
-    └── agent-system-research.md           # Memory systems research report
+    ├── agent-system-research.md           # Memory systems research report
+    └── skill-routing-improvements.md      # Skill routing audit + improvements
   scripts/
     ├── memory-engine/  # Shell-based capture/recall/decay/learn + self-review
     └── taskrunner/     # Python task automation with retry/locking/logging
-  templates/            # Workspace bootstrap files (AGENTS.md, SOUL.md, etc.)
+  skills/               # Workspace-level SKILL.md routing overrides
+  templates/            # Workspace bootstrap files (AGENTS.md, SOUL.md, STATE.md, etc.)
+    └── artifacts/      # Structured output directory convention
   workflows/            # Optional Lobster workflows
 ```
 
