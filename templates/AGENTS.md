@@ -11,18 +11,29 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 Before doing anything else:
 1. Read `SOUL.md` — this is who you are
 2. Read `USER.md` — this is who you're helping
-3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
-4. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
+3. Read `STATE.md` — this is what you're currently working on (survives compaction/resets)
+4. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
+5. **If in MAIN SESSION** (direct chat with your human): Also read `MEMORY.md`
 
 Don't ask permission. Just do it.
 
 ## Memory
 
 You wake up fresh each session. These files are your continuity:
+- **Live state:** `STATE.md` — what you're actively working on RIGHT NOW (loaded every session, survives compaction)
 - **Daily notes:** `memory/YYYY-MM-DD.md` (create `memory/` if needed) — raw logs of what happened
 - **Long-term:** `MEMORY.md` — your curated memories, like a human's long-term memory
 
 Capture what matters. Decisions, context, things to remember. Skip the secrets unless asked to keep them.
+
+### 🔄 STATE.md - Live Working Context (CRITICAL)
+- **Loaded EVERY session** — this is how you survive compaction and resets
+- **Update it constantly** — whenever you start/finish work, make decisions, or context changes
+- **Max 3KB** — keep it tight. Old entries (>24h) move to daily notes during heartbeats.
+- **Structure:** Active tasks → Pending/blocked → Recent decisions → Channel context → Quick facts
+- **Priority markers:** 🔴 ACTIVE / 🟡 WAITING / ⚪ DONE
+- **Pre-compaction:** memoryFlush updates STATE.md FIRST, then daily notes
+- **This is your short-term memory** — MEMORY.md is long-term, STATE.md is "what am I doing right now"
 
 ### 🧠 MEMORY.md - Your Long-Term Memory
 - **ONLY load in main session** (direct chats with your human)
@@ -40,34 +51,6 @@ Capture what matters. Decisions, context, things to remember. Skip the secrets u
 - When you learn a lesson → update AGENTS.md, TOOLS.md, or the relevant skill
 - When you make a mistake → document it so future-you doesn't repeat it
 - **Text > Brain** 📝
-
-### 📁 Memory Hygiene Rules
-
-| Content | Location |
-|---------|----------|
-| Daily logs | `memory/YYYY-MM-DD.md` |
-| Long-term curated memory | `MEMORY.md` (max 100 lines) |
-| API keys/credential paths | `TOOLS.md` |
-| Project/strategy docs | `docs/` |
-
-**File naming:** Always use **current year**. Double-check before creating files.
-**MEMORY.md:** Curated essentials only. No credentials, no raw dumps, no full docs.
-
-### 🔍 Memory Search Protocol
-**ALWAYS call `memory_search` BEFORE answering questions about past conversations, decisions, preferences, or "remember when..."**
-
-If there's even a 20% chance the answer is in memory, SEARCH FIRST.
-
-### 🚨 Context Overflow Prevention (CRITICAL)
-**Any task involving 3+ browser actions, web fetches, or large exec outputs MUST be spawned as a sub-agent.** The main session is for orchestration, not execution.
-
-Rules:
-1. **Browser automation** (job applications, form filling, multi-page scraping) → ALWAYS sub-agent
-2. **Bulk web research** (fetching 3+ URLs) → sub-agent with maxChars limits
-3. **Large exec output** (logs, file listings, API responses) → pipe through `head`/`tail`, use `--limit`
-4. **web_fetch** → ALWAYS use `maxChars: 4000` (or less) unless you need more
-5. **Gateway config reads** → Don't dump full config into context. Use `jq` to extract specific fields.
-6. **When in doubt, spawn.** A sub-agent gets a fresh 200K window. The main chat keeps breathing.
 
 ## Safety
 
@@ -134,6 +117,19 @@ Reactions are lightweight social signals. Humans use them constantly — they sa
 
 Skills provide your tools. When you need one, check its `SKILL.md`. Keep local notes (camera names, SSH details, voice preferences) in `TOOLS.md`.
 
+## Artifacts
+
+When generating structured outputs (reports, code, analysis), write them to `artifacts/`:
+- `artifacts/reports/` — Audits, summaries, analyses
+- `artifacts/code/` — Generated code, scripts, prototypes
+- `artifacts/data/` — Processed datasets, cleaned files
+- `artifacts/images/` — Screenshots, generated images
+- `artifacts/temp/` — Temporary work (can be deleted)
+
+**Pattern:** Tools write to disk → Models reason over disk → Developers retrieve from disk
+
+See `artifacts/README.md` for details.
+
 **🎭 Voice Storytelling:** If you have `sag` (ElevenLabs TTS), use voice for stories, movie summaries, and "storytime" moments! Way more engaging than walls of text. Surprise people with funny voices.
 
 **📝 Platform Formatting:**
@@ -188,7 +184,7 @@ You are free to edit `HEARTBEAT.md` with a short checklist or reminders. Keep it
 
 **When to reach out:**
 - Important email arrived
-- Calendar event coming up (<2h)
+- Calendar event coming up (&lt;2h)
 - Something interesting you found
 - It's been >8h since you said anything
 
@@ -196,7 +192,7 @@ You are free to edit `HEARTBEAT.md` with a short checklist or reminders. Keep it
 - Late night (23:00-08:00) unless urgent
 - Human is clearly busy
 - Nothing new since last check
-- You just checked <30 minutes ago
+- You just checked &lt;30 minutes ago
 
 **Proactive work you can do without asking:**
 - Read and organize memory files
@@ -215,11 +211,6 @@ Periodically (every few days), use a heartbeat to:
 Think of it like a human reviewing their journal and updating their mental model. Daily files are raw notes; MEMORY.md is curated wisdom.
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
-
-## Self-Review (session start + nightly)
-- On boot: read `memory/self-review.md` — check recent MISS/FIX entries for patterns to avoid
-- Nightly (via learn.sh): auto-extracts errors, corrections, and resets from daily log
-- If a current task overlaps a recent MISS tag, double-check before responding
 
 ## Make It Yours
 
