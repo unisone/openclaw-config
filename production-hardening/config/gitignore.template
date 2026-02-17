@@ -1,0 +1,23 @@
+# OpenClaw Production .gitignore
+# Source: github.com/unisone/openclaw-config
+
+# Secrets
+.env
+*.env
+
+# Logs
+logs/
+*.log
+*.log.gz
+
+# Sessions
+agents/*/sessions/
+workspace/
+
+# Backups
+backups/
+
+# Temp
+*.tmp
+*.swp
+.DS_Store

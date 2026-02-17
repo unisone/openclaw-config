@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>ai.openclaw.gateway</string>
+
+    <key>Comment</key>
+    <string>OpenClaw Gateway - Production Config (unisone/openclaw-config)</string>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <!-- Community Best Practices (GitHub Issue #4632) -->
+    <key>ThrottleInterval</key>
+    <integer>5</integer>
+
+    <key>ExitTimeOut</key>
+    <integer>20</integer>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/opt/homebrew/bin/node</string>
+      <string>/opt/homebrew/lib/node_modules/openclaw/dist/index.js</string>
+      <string>gateway</string>
+      <string>--port</string>
+      <string>18789</string>
+    </array>
+
+    <key>StandardOutPath</key>
+    <string>/Users/YOUR_USERNAME/.openclaw/logs/gateway.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/YOUR_USERNAME/.openclaw/logs/gateway.err.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>HOME</key>
+      <string>/Users/YOUR_USERNAME</string>
+      <key>PATH</key>
+      <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+      <key>OPENCLAW_GATEWAY_PORT</key>
+      <string>18789</string>
+      <key>OPENCLAW_LAUNCHD_LABEL</key>
+      <string>ai.openclaw.gateway</string>
+      <key>OPENCLAW_SERVICE_KIND</key>
+      <string>gateway</string>
+      <key>OPENCLAW_SERVICE_VERSION</key>
+      <string>2026.2.15</string>
+    </dict>
+  </dict>
+</plist>
