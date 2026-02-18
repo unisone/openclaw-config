@@ -1,0 +1,22 @@
+// Slack Block Streaming — Incremental message updates in Slack (chat.update)
+// Compatible with OpenClaw 2026.2.15+ (config key present earlier; behavior improved over time)
+//
+// Why:
+// - Slack otherwise posts the full response only at the end
+// - This makes long outputs feel “alive” without true token streaming
+
+{
+  channels: {
+    slack: {
+      // Turn on block streaming
+      blockStreaming: true,
+
+      // Optional tuning (defaults are fine)
+      // blockStreamingCoalesce: {
+      //   minChars: 200,
+      //   maxChars: 1200,
+      //   idleMs: 1200
+      // }
+    }
+  }
+}

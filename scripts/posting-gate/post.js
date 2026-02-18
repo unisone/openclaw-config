@@ -83,7 +83,14 @@ async function postToLinkedIn(text) {
     }
     const tokens = JSON.parse(fs.readFileSync(tokenPath, 'utf8'));
     const accessToken = tokens.accessToken;
-    const personUrn = 'urn:li:person:mYIFYy5MwS';
+
+    // ⚠️ Do NOT hardcode your LinkedIn URN in a public repo.
+    // Set it in your environment (or load from a private secrets manager):
+    //   export LINKEDIN_PERSON_URN="urn:li:person:..."
+    const personUrn = process.env.LINKEDIN_PERSON_URN;
+    if (!personUrn) {
+      return { success: false, error: 'Missing LINKEDIN_PERSON_URN (e.g. urn:li:person:...)' };
+    }
 
     const payload = JSON.stringify({
       author: personUrn,

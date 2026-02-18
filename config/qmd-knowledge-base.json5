@@ -1,0 +1,44 @@
+// QMD Knowledge Base — Index a local `knowledge/` directory and enable safe scope.
+// Compatible with OpenClaw 2026.2.17+
+//
+// What this does:
+// - Ensures `knowledge/**/*.md` is searchable/injectable via QMD memory
+// - Keeps default-deny scope (recommended), then allows only DMs by default
+// - You can allow Slack channels/groups explicitly if desired
+
+{
+  memory: {
+    backend: "qmd",
+    citations: "auto",
+
+    qmd: {
+      includeDefaultMemory: true,
+
+      // NOTE: Newer schema uses {path, pattern} objects.
+      paths: [
+        { path: "knowledge", pattern: "**/*.md" }
+      ],
+
+      update: {
+        interval: "5m",
+        debounceMs: 15000
+      },
+
+      limits: {
+        maxResults: 8,
+        timeoutMs: 5000
+      },
+
+      scope: {
+        default: "deny",
+        rules: [
+          { action: "allow", match: { chatType: "direct" } },
+
+          // Optional Slack enables (uncomment to allow non-DM memory):
+          // { action: "allow", match: { channel: "slack", chatType: "channel" } },
+          // { action: "allow", match: { channel: "slack", chatType: "group" } },
+        ]
+      }
+    }
+  }
+}
