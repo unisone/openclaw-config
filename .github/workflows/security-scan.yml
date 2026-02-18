@@ -30,7 +30,7 @@ jobs:
             "GitHub personal token|ghp_[0-9A-Za-z]{36}"
             "GitHub user token|ghu_[0-9A-Za-z]{36}"
             "AWS access key|AKIA[0-9A-Z]{16}"
-            "Generic secret assignment|['\"]?(?:password|secret|token|api_key|apikey)['\"]?\s*[:=]\s*['\"][^'\"$]{8,}['\"]"
+            "Generic secret assignment|['\"]?(?:password|secret|token|api_key|apikey)['\"]?\s*[:=]\s*['\"](?!YOUR_|PLACEHOLDER|example|changeme|sk-proj-\.\.\.)[^'\"$]{8,}['\"]"
             "Bearer token|Bearer\s+[a-zA-Z0-9._-]{20,}"
             "Private key header|-----BEGIN (RSA |EC |DSA )?PRIVATE KEY-----"
             "Perplexity API key|pplx-[a-zA-Z0-9]{40,}"
