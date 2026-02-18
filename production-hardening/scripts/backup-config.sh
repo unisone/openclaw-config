@@ -16,7 +16,7 @@ rm -rf "$(date +%Y%m%d)"
 # CRITICAL: Verify integrity (community lesson learned)
 if ! tar -tzf "$(date +%Y%m%d).tar.gz" > /dev/null 2>&1; then
   echo "❌ BACKUP FAILED - integrity check failed at $(date)" | \
-    mail -s "OpenClaw Backup FAILED" alexvzay@gmail.com
+    mail -s "OpenClaw Backup FAILED" your-email@example.com
   exit 1
 fi
 

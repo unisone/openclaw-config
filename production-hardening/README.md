@@ -291,7 +291,7 @@ MIT License - See [LICENSE](../LICENSE)
 
 - GitHub: [@unisone](https://github.com/unisone)
 - LinkedIn: [linkedin.com/in/alexzay](https://linkedin.com/in/alexzay)
-- Email: alexvzay@gmail.com
+- Email: your-email@example.com
 
 *Built with production-grade standards. Battle-tested on real OpenClaw deployments.*
 

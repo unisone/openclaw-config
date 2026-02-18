@@ -1,6 +1,6 @@
 # AGI System Documentation
 
-*Complete intelligence augmentation system for Dan instance.*
+*Intelligence augmentation system for OpenClaw agents — structured reasoning, self-improvement, and verification.*
 
 ## Overview
 

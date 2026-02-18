@@ -5,7 +5,7 @@
   channels: {
     discord: {
       enabled: true,
-      token: "YOUR_DISCORD_BOT_TOKEN",
+      // token: "...",  // Set your Discord bot token here or via env
       groupPolicy: "allowlist",
       dm: {
         policy: "open",

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Community-validated health monitoring
 
-ALERT_EMAIL="alexvzay@gmail.com"
+ALERT_EMAIL="your-email@example.com"
 GATEWAY_PORT=18789
 
 # Check gateway

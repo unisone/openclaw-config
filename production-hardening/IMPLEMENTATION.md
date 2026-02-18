@@ -163,7 +163,7 @@ chmod +x ~/.openclaw/scripts/backup-config.sh
 ### Step 4.2: Customize Email (Optional)
 ```bash
 # Edit script to change email
-sed -i '' 's/alexvzay@gmail.com/YOUR-EMAIL@example.com/g' ~/.openclaw/scripts/backup-config.sh
+sed -i '' 's/your-email@example.com/YOUR-EMAIL@example.com/g' ~/.openclaw/scripts/backup-config.sh
 ```
 
 ### Step 4.3: Add to Cron (with explicit PATH)
@@ -192,7 +192,7 @@ chmod +x ~/.openclaw/scripts/healthcheck.sh
 
 ### Step 5.2: Customize Email (Optional)
 ```bash
-sed -i '' 's/alexvzay@gmail.com/YOUR-EMAIL@example.com/g' ~/.openclaw/scripts/healthcheck.sh
+sed -i '' 's/your-email@example.com/YOUR-EMAIL@example.com/g' ~/.openclaw/scripts/healthcheck.sh
 ```
 
 ### Step 5.3: Add to Cron
