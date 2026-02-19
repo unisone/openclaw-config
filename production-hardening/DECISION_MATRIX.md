@@ -15,7 +15,7 @@
 // openclaw.json lines 11-12
 "env": {
   "vars": {
-    "BRAVE_API_KEY": "BSAbmRO-Lq6nkbjtlF9MHbhpDJICtCC",
+    "BRAVE_API_KEY": "BSAbmRO-...",
     "PERPLEXITY_API_KEY": "pplx-jXaL..."
   }
 }
@@ -389,10 +389,10 @@ $ ls -la ~/.openclaw/.env
 **Multi-user system exposure**:
 ```bash
 # As another user on same Mac:
-$ ls /Users/zaytsev/.openclaw/
+$ ls /Users/YOUR_USERNAME/.openclaw/
 openclaw.json  logs/  agents/  # Can see everything!
 
-$ cat /Users/zaytsev/.openclaw/openclaw.json
+$ cat /Users/YOUR_USERNAME/.openclaw/openclaw.json
 # Can read config (even if secrets are removed)
 ```
 
