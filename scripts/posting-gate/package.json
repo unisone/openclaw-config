@@ -1,0 +1,27 @@
+{
+  "name": "openclaw-posting-gate",
+  "version": "1.0.0",
+  "description": "Technical safeguard system preventing unauthorized AI agent social media posting",
+  "main": "approval-server.js",
+  "scripts": {
+    "start": "node approval-server.js",
+    "install-restrictions": "node install-restrictions.js",
+    "test": "node test-system.js",
+    "logs": "tail -f logs/approvals-$(date +%Y-%m-%d).jsonl",
+    "status": "curl -s http://localhost:18790/health | jq ."
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "express": "^4.18.2",
+    "axios": "^1.6.0"
+  },
+  "keywords": [
+    "ai-safety",
+    "agent-guardrails",
+    "approval-gate",
+    "discord-bot",
+    "social-media-safety"
+  ],
+  "author": "OpenClaw Security",
+  "license": "MIT"
+}

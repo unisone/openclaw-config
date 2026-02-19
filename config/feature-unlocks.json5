@@ -1,0 +1,108 @@
+// Feature Unlocks — The "60% to 100%" config
+// OpenClaw ships with many powerful features disabled by default to avoid overwhelming
+// new users. This config enables the "enthusiast tier" features that are stable,
+// well-tested, and safe — but require you to understand what they do.
+//
+// These aren't experimental. They're production-ready features that power users want.
+// Running in production at github.com/unisone/openclaw-config since Feb 2026.
+
+{
+  agents: {
+    defaults: {
+      // Memory search with session transcript indexing
+      // Why disabled by default: Adds ~2s startup time on first run
+      // Why enable: Semantic search over ALL past conversations, not just memory/ folder
+      memorySearch: {
+        sources: [
+          "memory",    // Search memory/ folder
+          "sessions"   // Search session transcripts (THE UNLOCK)
+        ],
+        sync: {
+          watch: true,              // Auto-reindex when files change
+          watchDebounceMs: 3000     // Wait 3s before reindexing
+        },
+        experimental: {
+          sessionMemory: true       // Enable enhanced session transcript search
+        },
+        // Hybrid search config (combines vector + text search)
+        vectorWeight: 0.7,          // Weight for semantic/vector similarity
+        textWeight: 0.3,            // Weight for keyword/BM25 matching
+        maxResults: 6               // Return up to 6 results per search
+      },
+
+      // Typing indicator — shows when agent is thinking
+      // Why disabled by default: Some users find it distracting
+      // Why enable: Better UX in group chats, clear "I'm working" signal
+      typingMode: "thinking",  // Show typing indicator while generating response
+
+      // Heartbeat active hours — proactive checks during work hours
+      // Why disabled by default: Can feel intrusive if misconfigured
+      // Why enable: Agent can proactively check emails, calendar, mentions
+      heartbeat: {
+        every: "1h",                       // Run heartbeat every hour
+        activeHours: {
+          start: "08:00",
+          end: "23:00",
+          timezone: "America/New_York"     // Set to your timezone
+        },
+        model: "opencode/kimi-k2.5-free",  // Use fast model for heartbeats
+        includeReasoning: false,           // No reasoning for heartbeats
+        // Slack-optimized heartbeat prompt (replace channel IDs with your own)
+        prompt: "Heartbeat check. Follow HEARTBEAT.md.\n\nRULES:\n- Default behavior: stay quiet.\n- If nothing needs attention: reply EXACTLY `HEARTBEAT_OK`.\n- If something needs attention: do NOT do deep work here. Instead, spawn a subagent (sessions_spawn) to investigate and draft the message. Then post only a short alert summary + the subagent result back to your ops channel.\n\nESCALATION CONTRACT:\nWhen you detect a potential alert, spawn a subagent with:\n- model: openai-codex/gpt-5.2 (or your preferred model)\n- task: investigate + verify + produce a concise Slack-ready message\n- cleanup: delete\n\nKeep outputs short."
+      }
+    }
+  },
+
+  tools: {
+    // Image auto-analysis — agent automatically analyzes images you send
+    // Why disabled by default: Costs $ on every image
+    // Why enable: Natural conversation flow, no need to ask "what's in this image?"
+    media: {
+      image: {
+        enabled: true,
+        maxBytes: 10485760  // 10MB max (production value)
+      },
+      
+      // Audio auto-analysis — transcribe voice messages automatically
+      audio: {
+        enabled: true,
+        maxBytes: 52428800  // 50MB max (production value)
+      }
+    },
+
+    // Link auto-fetch — agent automatically fetches page content when you paste links
+    // Why disabled by default: Can be slow, might fetch paywalled content
+    // Why enable: Natural research flow, no need to ask "check this link"
+    links: {
+      enabled: true,
+      maxLinks: 5,         // Fetch up to 5 links per message
+      timeoutSeconds: 15   // 15s timeout per link
+    },
+
+    // Elevated commands — allow running commands with sudo/elevated permissions
+    // ⚠️ SECURITY WARNING: Only enable if you trust the agent completely
+    // Why disabled by default: Major security risk if misconfigured
+    // Why enable: System administration tasks, installing packages, etc.
+    elevated: {
+      enabled: false,      // KEEP THIS FALSE unless you know what you're doing
+      // allowCommands: ["apt", "brew", "systemctl"]  // Whitelist specific commands
+    },
+
+    // Exec settings — customize shell command execution
+    exec: {
+      defaultShell: "/bin/zsh",      // Default shell for exec commands
+      timeout: 300,                   // Default timeout in seconds (5 min)
+      // workdir: "/Users/you/.openclaw/workspace"  // Default working directory
+    }
+  },
+
+  // Hot reload — gateway auto-reloads when config changes
+  // Why disabled by default: Can cause issues during manual config edits
+  // Why enable: Fast iteration, no manual restart needed
+  gateway: {
+    reload: {
+      mode: "hybrid",      // Reload config without restarting gateway
+      debounceMs: 2000     // Wait 2s after last change before reloading
+    }
+  }
+}

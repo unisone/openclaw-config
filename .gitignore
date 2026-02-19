@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Environment & secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated data
+memory/store.json
+approval-tokens.json
+alerts/
+
+# Backups
+*.backup
+*.bak
+*.orig
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~

@@ -1,0 +1,49 @@
+// Model Aliases & Fallbacks — Production setup (Feb 2026)
+// Source: real running config from ~/.openclaw/openclaw.json (secrets removed).
+//
+// Goals:
+// - A strong default model for main work
+// - Reliable fallbacks if a provider is down / rate-limited
+// - A fast/cheap model for subagents
+// - Short aliases for quick switching (e.g., /model opus)
+
+{
+  agents: {
+    defaults: {
+      model: {
+        primary: "anthropic/claude-opus-4-5",
+        fallbacks: [
+          "anthropic/claude-sonnet-4-5",
+          "openai-codex/gpt-5.2"
+        ]
+      },
+
+      // Aliases: case-sensitive aliases are supported, so we include both "opus" and "Opus".
+      // LESSON LEARNED: Avoid alias collisions — having "opus" map to different models
+      // in different contexts caused a production Codex-only fallback chain that failed
+      // when OpenAI had outages. Always use unique aliases for different models.
+      models: {
+        "opencode/kimi-k2.5-free": { alias: "kimi" },
+
+        "anthropic/claude-opus-4-5": { alias: "opus" },
+        "anthropic/claude-opus-4-6": { alias: "opus46" },
+        "opencode/claude-opus-4-5": { alias: "Opus" },
+
+        "anthropic/claude-sonnet-4-5": { alias: "sonnet" },
+
+        // Included explicitly so it can be selected directly if desired.
+        "openai-codex/gpt-5.2": {}
+      },
+
+      subagents: {
+        model: {
+          primary: "opencode/kimi-k2.5-free",
+          fallbacks: [
+            "anthropic/claude-sonnet-4-5",
+            "openai-codex/gpt-5.2"
+          ]
+        }
+      }
+    }
+  }
+}

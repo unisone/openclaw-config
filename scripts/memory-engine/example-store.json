@@ -1,0 +1,46 @@
+{
+  "memories": [
+    {
+      "category": "preference",
+      "content": "Prefers direct communication, no filler...",
+      "score": 0.92,
+      "keywords": null
+    },
+    {
+      "category": "fact",
+      "content": "Project uses Next.js 15 + Supabase...",
+      "score": 0.85,
+      "keywords": null
+    },
+    {
+      "category": "decision",
+      "content": "Switched from Brave to Perplexity for web search...",
+      "score": 1.36,
+      "keywords": null
+    },
+    {
+      "category": "project",
+      "content": "Landing page deployed at example.com...",
+      "score": 0.91,
+      "keywords": null
+    },
+    {
+      "category": "correction",
+      "content": "Don't use gog for IMAP accounts — use himalaya...",
+      "score": 0.91,
+      "keywords": null
+    }
+  ],
+  "meta": {
+    "note": "Example store — anonymized. Real stores have 200+ memories.",
+    "categories": [
+      "fact",
+      "correction",
+      "decision",
+      "project",
+      "people",
+      "preference",
+      "todo"
+    ]
+  }
+}

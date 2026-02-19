@@ -1,0 +1,102 @@
+// Pro Optimization — Production-tuned settings from Feb 2026
+// This is the "dial it to 11" config — everything tuned for power users who want
+// maximum capability with smart safety rails. Running in production daily.
+//
+// Why OpenClaw ships conservative by default:
+// - Most users want "just works" over "maximum power"
+// - Aggressive settings can be confusing during initial setup
+// - Provider rate limits vary wildly per user
+//
+// This config represents 60% → 100% — unlocking features that are stable but
+// require understanding what they do. Not "experimental" — just "enthusiast."
+
+{
+  // Auth & provider reliability
+  auth: {
+    cooldowns: {
+      billingBackoffHours: 2,    // Wait 2h before retrying after billing error
+      billingMaxHours: 12,       // Max 12h of backoff total
+      failureWindowHours: 12     // Track failures over 12h window
+    }
+  },
+
+  // Cron job management
+  cron: {
+    maxConcurrentRuns: 5         // Allow 5 cron jobs to run simultaneously
+                                  // (up from 3 — morning window has overlapping jobs)
+  },
+
+  agents: {
+    defaults: {
+      // Subagent configuration — critical for parallel work
+      subagents: {
+        maxConcurrent: 8,            // Allow 8 concurrent subagents
+        archiveAfterMinutes: 60,     // Archive subagents after 60min idle
+        thinking: "high"             // Subagents do real work — give them thinking budget
+      },
+
+      // Default thinking mode for main sessions
+      thinkingDefault: "low",    // Low thinking for speed, use /reasoning when needed
+
+      // Request timeout
+      timeoutSeconds: 300,       // 5-minute timeout for long-running operations
+
+      // Memory search optimization
+      memorySearch: {
+        query: {
+          maxResults: 6          // 6 memories per context (~800 tokens, 0.4% of window)
+        }
+      },
+
+      // Concurrent main agent sessions
+      maxConcurrent: 4           // Allow 4 concurrent main agent sessions
+    }
+  },
+
+  // Tool optimizations
+  tools: {
+    web: {
+      search: {
+        cacheTtlMinutes: 15      // Cache search results for 15 minutes
+      },
+      fetch: {
+        cacheTtlMinutes: 10      // Cache fetched pages for 10 minutes
+      }
+    },
+    // Elevated exec — allow trusted users to run host commands
+    elevated: {
+      enabled: true,
+      allowFrom: {
+        discord: ["YOUR_DISCORD_USER_ID"],   // Replace with your ID
+        whatsapp: []
+      }
+    }
+  },
+
+  // Message handling
+  messages: {
+    removeAckAfterReply: true    // Clean up 👀 reactions after replying
+  },
+
+  // Discord-specific
+  channels: {
+    discord: {
+      replyToMode: "first"       // Reply to the first message in a thread, not last
+    }
+  },
+
+  // Logging
+  logging: {
+    redactSensitive: "tools"     // Redact sensitive data in tool call logs
+  },
+
+  // Session management — longer idle time for Discord
+  session: {
+    resetByChannel: {
+      discord: {
+        mode: "idle",
+        idleMinutes: 720         // 12-hour idle timeout (vs 24h default)
+      }
+    }
+  }
+}

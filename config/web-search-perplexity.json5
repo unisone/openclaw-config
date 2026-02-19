@@ -1,0 +1,50 @@
+// Web Search with Perplexity — Feb 2026
+// Why Perplexity over Brave:
+//
+// Brave Search:
+// - Free tier: 1 request/second rate limit (429 errors under load)
+// - Good for light usage
+// - Raw search results (you need to process them)
+//
+// Perplexity:
+// - Paid subscription: No rate limits
+// - AI-synthesized answers with citations
+// - Better for heavy cron/subagent usage
+//
+// If you hit Brave rate limits (435 burst errors in a day like we did),
+// switch to Perplexity.
+//
+// IMPORTANT: Set baseUrl to use Perplexity API directly.
+// Default routes through OpenRouter which uses different model names.
+
+{
+  // Store the API key in env vars (don't hardcode)
+  env: {
+    vars: {
+      PERPLEXITY_API_KEY: "pplx-your-key-here"
+    }
+  },
+
+  tools: {
+    web: {
+      search: {
+        enabled: true,
+        provider: "perplexity",              // "brave" or "perplexity"
+        apiKey: "${PERPLEXITY_API_KEY}",     // Reference env var
+        maxResults: 10,                       // Default results per search
+        timeoutSeconds: 20,                   // Search timeout
+        cacheTtlMinutes: 15,                  // Cache results for 15 min
+        perplexity: {
+          baseUrl: "https://api.perplexity.ai",  // REQUIRED: Use Perplexity directly
+          model: "sonar-pro"                      // or "sonar", "sonar-reasoning"
+        }
+      },
+      fetch: {
+        enabled: true,
+        maxChars: 8000,                       // Truncate fetched pages
+        timeoutSeconds: 25,
+        cacheTtlMinutes: 10
+      }
+    }
+  }
+}

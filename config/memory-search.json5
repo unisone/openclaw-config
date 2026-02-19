@@ -1,0 +1,33 @@
+// Memory Search — Vector-powered semantic search over memory files
+// Enables memory_search tool for recalling past conversations and decisions
+// Requires an embedding API key (OpenAI, Gemini, or local model)
+
+{
+  agents: {
+    defaults: {
+      memorySearch: {
+        enabled: true,
+        sources: ["memory", "sessions"],  // search memory/*.md + session transcripts
+        provider: "openai",               // or "gemini" or "local"
+        model: "text-embedding-3-small",  // cheapest OpenAI embedding model
+        store: {
+          vector: { enabled: true }
+        },
+        sync: {
+          watch: true                     // auto-reindex when files change
+        },
+        query: {
+          hybrid: {
+            enabled: true,                // combine vector + keyword search
+            vectorWeight: 0.7,
+            textWeight: 0.3
+          }
+        },
+        cache: {
+          enabled: true,
+          maxEntries: 50000
+        }
+      }
+    }
+  }
+}

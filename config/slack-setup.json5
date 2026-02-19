@@ -1,0 +1,67 @@
+// Slack Setup — Production-tested Slack configuration (Feb 2026)
+// This config prevents session sprawl and configures Slack for optimal agent behavior.
+//
+// Key principles:
+// - Use allowlist policies to prevent unintended session creation
+// - Disable reaction notifications to avoid noise
+// - Configure DM vs channel behavior appropriately
+//
+// Note: OpenClaw 2026.2.14 introduced a key migration: `dmPolicy` → `dm.policy`
+// Run `openclaw doctor --fix` to auto-migrate if upgrading from older versions.
+
+{
+  plugins: {
+    slack: {
+      // Socket mode is recommended for most setups (no need to expose webhook endpoint)
+      mode: "socket",
+      
+      // App-level token (starts with xapp-) from Slack API dashboard
+      // Store in keychain: security add-generic-password -s "slack-app-token" -a "slack" -w "xapp-..."
+      // appToken: "xapp-...",  // Or load from keychain
+      
+      // Bot token (starts with xoxb-) from Slack API dashboard
+      // Store in keychain: security add-generic-password -s "slack-bot-token" -a "slack" -w "xoxb-..."
+      // botToken: "xoxb-...",  // Or load from keychain
+      
+      // Group policy: "allowlist" prevents creating sessions for every channel/thread
+      // Without this, you'll get hundreds of sessions from public channels
+      groupPolicy: "allowlist",
+      
+      // DM policy: "allowlist" means only specific users can DM the bot
+      // Set to "open" if you want anyone in the workspace to DM the bot
+      dm: {
+        policy: "allowlist",  // Changed from top-level dmPolicy in 2026.2.14
+        enabled: true         // Enable DM support
+      },
+      
+      // Allowlisted channels (add your channel IDs here)
+      // Find channel ID: right-click channel → View channel details → copy ID from bottom
+      allowlist: [
+        // "C0123456789",  // #general
+        // "C9876543210",  // #ops
+        // "U0ABCDEFGHI",  // @your-user-id (for DMs)
+      ],
+      
+      // Require @mention in channels by default (recommended)
+      // Set to false if you want the bot to respond to every message in allowed channels
+      requireMention: {
+        channel: true,   // Require @mention in channels
+        group: true,     // Require @mention in private groups
+        dm: false        // No @mention needed in DMs (you're already talking directly)
+      },
+      
+      // Reaction notifications: "off" prevents spam from emoji reactions
+      // Set to "all" if you want to be notified of every reaction
+      reactionNotifications: "off",
+      
+      // History limit: how many messages to load on session start
+      historyLimit: 100,
+      
+      // Typing indicator: show when agent is thinking
+      typingIndicator: true,
+      
+      // Thread replies: always reply in thread if message is in a thread
+      alwaysThread: true
+    }
+  }
+}

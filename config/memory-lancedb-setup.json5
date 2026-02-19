@@ -1,0 +1,52 @@
+// memory-lancedb Plugin Setup — Feb 2026
+// Long-term memory with OpenAI embeddings + auto-capture/recall
+//
+// This replaces the basic memory search with a LanceDB-backed vector store.
+// Benefits:
+// - Automatic capture of important facts/decisions from conversations
+// - Automatic injection of relevant memories into context
+// - Semantic search across all memory files
+//
+// Prerequisite:
+// On macOS ARM64, you need to install the native binary after each update:
+//   cd /opt/homebrew/lib/node_modules/openclaw && npm install @lancedb/lancedb-darwin-arm64@0.24.1 --no-save
+
+{
+  plugins: {
+    slots: {
+      memory: "memory-lancedb"    // Use LanceDB instead of built-in memory
+    },
+    entries: {
+      "memory-lancedb": {
+        enabled: true,
+        config: {
+          embedding: {
+            apiKey: "${OPENAI_API_KEY}",        // Use env var reference
+            model: "text-embedding-3-small"     // Fast, cheap, good quality
+          },
+          autoCapture: true,   // Auto-capture important info from conversations
+          autoRecall: true     // Auto-inject relevant memories into context
+        }
+      }
+    }
+  },
+
+  // Memory search query settings
+  agents: {
+    defaults: {
+      memorySearch: {
+        sources: ["memory", "sessions"],   // Index both memory files and session transcripts
+        provider: "openai",                 // Use OpenAI for embeddings
+        fallback: "local",                  // Fall back to local embeddings if OpenAI fails
+        model: "text-embedding-3-small",
+        sync: {
+          watch: true,                      // Watch for file changes
+          watchDebounceMs: 3000             // Debounce file change events
+        },
+        query: {
+          maxResults: 6     // Return 6 memories per context (~800 tokens, 0.4% of 200K window)
+        }
+      }
+    }
+  }
+}

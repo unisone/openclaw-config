@@ -1,0 +1,33 @@
+{
+  "capture": {
+    "minConfidence": 0.6,
+    "categories": ["fact", "preference", "decision", "insight", "todo", "correction", "person", "project"],
+    "excludePatterns": ["HEARTBEAT_OK", "NO_REPLY", "^\\s*$"]
+  },
+  "decay": {
+    "halfLifeDays": 14,
+    "minScore": 0.1,
+    "boostOnRecall": 0.3,
+    "categoryWeights": {
+      "fact": 1.0,
+      "preference": 1.5,
+      "decision": 1.8,
+      "insight": 1.4,
+      "todo": 0.8,
+      "correction": 2.0,
+      "person": 1.6,
+      "project": 1.2
+    }
+  },
+  "recall": {
+    "maxResults": 15,
+    "minRelevance": 0.4,
+    "contextWindow": 5
+  },
+  "learn": {
+    "consolidateAfterDays": 3,
+    "maxMemoryLines": 100,
+    "archivePath": "memory/archive",
+    "insightMinSupport": 2
+  }
+}

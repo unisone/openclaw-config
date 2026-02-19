@@ -1,0 +1,70 @@
+// Context Overflow Prevention — Production defensive stack (Feb 2026)
+// Source: real running config from ~/.openclaw/openclaw.json (secrets removed).
+//
+// This is the *balanced* production setup (not the "maximum aggression" lab config).
+// Use when you do heavy tool work (browser runs, large exec outputs, multi-fetch research).
+
+{
+  agents: {
+    defaults: {
+      // Compaction tuned for overflow prevention without over-summarizing.
+      compaction: {
+        mode: "safeguard",
+        reserveTokensFloor: 40000,
+        maxHistoryShare: 0.6,
+        memoryFlush: {
+          enabled: true,
+          softThresholdTokens: 120000,
+          prompt: "If you are approaching context limits, write key state/decisions to memory/YYYY-MM-DD.md before compaction triggers."
+        }
+      },
+
+      // Pruning tuned to protect context window from massive tool payloads.
+      contextPruning: {
+        mode: "cache-ttl",
+        ttl: "5m",
+        keepLastAssistants: 3,
+        softTrimRatio: 0.3,
+        hardClearRatio: 0.3,
+        minPrunableToolChars: 50000,
+        softTrim: {
+          maxChars: 4000,
+          headChars: 750,
+          tailChars: 750
+        },
+        hardClear: {
+          enabled: true,
+          placeholder: "[Cleared — re-run tool if needed]"
+        }
+      },
+
+      // Subagents: keep parallel work fast/cheap and auto-archive to reduce clutter.
+      subagents: {
+        maxConcurrent: 8,
+        archiveAfterMinutes: 60,    // Auto-archive idle subagents after 60 minutes
+        thinking: "high",            // Enable high-quality thinking for subagents
+        model: {
+          primary: "opencode/kimi-k2.5-free",
+          fallbacks: [
+            "anthropic/claude-sonnet-4-5",
+            "openai-codex/gpt-5.2"
+          ]
+        }
+      }
+    }
+  },
+
+  // Tool caching helps reduce repeated large responses (and cost).
+  tools: {
+    web: {
+      search: {
+        cacheTtlMinutes: 15
+      },
+      fetch: {
+        cacheTtlMinutes: 10,
+        timeoutSeconds: 25,
+        maxChars: 8000
+      }
+    }
+  }
+}

@@ -1,0 +1,141 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  secret-scan:
+    name: Secret & PII Detection
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan for API keys and tokens
+        run: |
+          echo "=== Scanning for secrets and API keys ==="
+          FOUND=0
+
+          # Pattern definitions: "label|regex"
+          PATTERNS=(
+            "OpenAI API key|sk-[a-zA-Z0-9_-]{20,}"
+            "Slack bot token|xoxb-[0-9A-Za-z-]+"
+            "Slack user token|xoxp-[0-9A-Za-z-]+"
+            "Slack app token|xapp-[0-9A-Za-z-]+"
+            "GitHub personal token|ghp_[0-9A-Za-z]{36}"
+            "GitHub user token|ghu_[0-9A-Za-z]{36}"
+            "AWS access key|AKIA[0-9A-Z]{16}"
+            "Generic secret assignment|['\"]?(?:password|secret|token|api_key|apikey)['\"]?\s*[:=]\s*['\"][^'\"$]{8,}['\"]"
+            "Bearer token|Bearer\s+[a-zA-Z0-9._-]{20,}"
+            "Private key header|-----BEGIN (RSA |EC |DSA )?PRIVATE KEY-----"
+            "Perplexity API key|pplx-[a-zA-Z0-9]{40,}"
+            "Anthropic API key|sk-ant-[a-zA-Z0-9-]{20,}"
+            "Linear API key|lin_api_[a-zA-Z0-9]{30,}"
+          )
+
+          for entry in "${PATTERNS[@]}"; do
+            LABEL="${entry%%|*}"
+            REGEX="${entry#*|}"
+            if grep -rPn "$REGEX" --include='*.md' --include='*.json' --include='*.json5' --include='*.js' --include='*.py' --include='*.sh' --include='*.yml' --include='*.yaml' --include='*.lobster' --include='*.txt' --exclude-dir='.git' --exclude-dir='node_modules' --exclude='.github/workflows/security-scan.yml' . 2>/dev/null; then
+              echo "::error::BLOCKED: Found potential $LABEL"
+              FOUND=1
+            fi
+          done
+
+          if [ "$FOUND" -eq 1 ]; then
+            echo ""
+            echo "::error::Secret scan failed. Remove all secrets before pushing."
+            exit 1
+          fi
+
+          echo "No secrets found."
+
+      - name: Scan for PII (personal identifiable information)
+        run: |
+          echo "=== Scanning for PII ==="
+          BLOCKED=0
+
+          # Email addresses (exclude generic/placeholder/example patterns — warning only)
+          if grep -rPn '[a-zA-Z0-9._%+-]+@(?!example\.com|placeholder\.com|yourdomain\.com|yourhandle|b\.com|gmail\.com)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' \
+            --include='*.md' --include='*.json' --include='*.json5' --include='*.js' --include='*.py' --include='*.sh' --include='*.lobster' \
+            --exclude-dir='.git' --exclude-dir='node_modules' --exclude='.github/workflows/security-scan.yml' . 2>/dev/null; then
+            echo "::warning::Found potential email addresses — verify these are intentional placeholders"
+          fi
+
+          # Phone numbers — warning only (many false positives in docs/examples)
+          if grep -rPn '(?<![0-9])\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}(?![0-9])' \
+            --include='*.md' --include='*.json' --include='*.json5' --include='*.js' --include='*.py' --include='*.sh' \
+            --exclude-dir='.git' --exclude-dir='node_modules' --exclude='.github/workflows/security-scan.yml' . 2>/dev/null; then
+            echo "::warning::Found potential phone numbers — verify these are examples"
+          fi
+
+          # Tailscale / private IPs (real blockers — excludes 127.x localhost)
+          if grep -rPn '(?:100\.\d{1,3}\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|192\.168\.\d{1,3}\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3})' \
+            --include='*.md' --include='*.json' --include='*.json5' --include='*.js' --include='*.py' --include='*.sh' \
+            --exclude-dir='.git' --exclude-dir='node_modules' --exclude='.github/workflows/security-scan.yml' . 2>/dev/null; then
+            echo "::error::BLOCKED: Found private/internal IP addresses"
+            BLOCKED=1
+          fi
+
+          if [ "$BLOCKED" -eq 1 ]; then
+            echo ""
+            echo "::error::PII scan found blocking issues. Remove private IPs before pushing."
+            exit 1
+          fi
+
+          echo "PII scan complete (warnings are advisory only)."
+
+      - name: Scan for hardcoded infrastructure IDs
+        run: |
+          echo "=== Scanning for infrastructure IDs ==="
+          FOUND=0
+
+          # Discord channel/server IDs (17-19 digit snowflakes that aren't placeholders)
+          if grep -rPn '\b\d{17,19}\b' \
+            --include='*.md' --include='*.json' --include='*.json5' --include='*.js' --include='*.py' --include='*.sh' --include='*.lobster' \
+            --exclude-dir='.git' --exclude-dir='node_modules' --exclude='.github/workflows/security-scan.yml' . 2>/dev/null | \
+            grep -v 'YOUR_' | grep -v 'PLACEHOLDER' | grep -v 'example' | grep -v '000000000000000000'; then
+            echo "::warning::Found potential Discord/Slack snowflake IDs — verify these are placeholders"
+          fi
+
+          # Notion database UUIDs (8-4-4-4-12 format)
+          if grep -rPn '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' \
+            --include='*.md' --include='*.json' --include='*.json5' --include='*.js' --include='*.py' --include='*.sh' \
+            --exclude-dir='.git' --exclude-dir='node_modules' --exclude='.github/workflows/security-scan.yml' . 2>/dev/null | \
+            grep -v 'YOUR_' | grep -v 'PLACEHOLDER' | grep -v '00000000-0000-0000-0000-000000000000'; then
+            echo "::error::BLOCKED: Found potential real Notion/service UUIDs"
+            FOUND=1
+          fi
+
+          if [ "$FOUND" -eq 1 ]; then
+            echo ""
+            echo "::error::Infrastructure ID scan failed. Replace real IDs with placeholders."
+            exit 1
+          fi
+
+          echo "No hardcoded infrastructure IDs found."
+
+      - name: Verify placeholder conventions
+        run: |
+          echo "=== Checking placeholder conventions ==="
+
+          # Check that known placeholder patterns exist (sanity check)
+          PLACEHOLDERS=(
+            "YOUR_DISCORD_CHANNEL_ID"
+            "YOUR_NOTION_DATABASE_ID"
+            "YOUR_X_HANDLE"
+          )
+
+          for PH in "${PLACEHOLDERS[@]}"; do
+            COUNT=$(grep -r "$PH" --include='*.md' --include='*.json5' --include='*.js' --exclude-dir='.git' . 2>/dev/null | wc -l)
+            if [ "$COUNT" -gt 0 ]; then
+              echo "Placeholder $PH found in $COUNT location(s)"
+            fi
+          done
+
+          echo "Placeholder check complete."

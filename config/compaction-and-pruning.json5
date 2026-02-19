@@ -1,0 +1,47 @@
+// Compaction & Pruning — Production-tested settings (Feb 2026)
+// Source: real running config from ~/.openclaw/openclaw.json (secrets removed).
+//
+// Practical goal: avoid context overflows without constantly losing useful history.
+// - Compaction keeps the session usable when the window fills up.
+// - Context pruning keeps giant tool outputs from crowding out the conversation.
+
+{
+  agents: {
+    defaults: {
+      // Compaction: summarizes older conversation when context fills up
+      compaction: {
+        mode: "safeguard",           // Production: controlled compaction behavior
+        reserveTokensFloor: 40000,   // Production: start compaction before overflow risk
+        maxHistoryShare: 0.6,        // Production: history can use up to 60% of context
+        memoryFlush: {
+          enabled: true,
+          // Production: only flush when you're *really* approaching limits
+          softThresholdTokens: 120000,
+          // Production-tested prompts for memory flush (keep STATE.md updated!)
+          prompt: "MEMORY FLUSH: Session approaching compaction. Do these IN ORDER:\n1. UPDATE STATE.md with current working context...\n2. THEN write to memory/YYYY-MM-DD.md with session details...\n\nSTATE.md is your lifeline after compaction — make it count. Keep it under 3KB.\nIf truly nothing to save, reply NO_REPLY.",
+          systemPrompt: "Pre-compaction memory flush. Update STATE.md FIRST (live working context — what's active, pending, recent decisions). Then write details to memory/YYYY-MM-DD.md. STATE.md survives compaction and gets loaded next session. Keep STATE.md under 3KB."
+        }
+      },
+
+      // Context pruning: trims old tool results from in-memory context per-request
+      // Note: this does NOT rewrite transcripts on disk; it only affects the live context.
+      contextPruning: {
+        mode: "cache-ttl",
+        ttl: "5m",                   // Production: keep tool results around for 5 minutes
+        keepLastAssistants: 5,       // Production: preserve recent assistant turns
+        softTrimRatio: 0.3,
+        hardClearRatio: 0.3,
+        minPrunableToolChars: 50000, // Production: only prune truly huge tool outputs
+        softTrim: {
+          maxChars: 4000,            // Production: keep up to 4K chars when trimming
+          headChars: 750,
+          tailChars: 750
+        },
+        hardClear: {
+          enabled: true,
+          placeholder: "[Cleared — re-run tool if needed]"
+        }
+      }
+    }
+  }
+}
