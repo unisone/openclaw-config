@@ -2,7 +2,7 @@
 
 All cover images and post visuals for X and LinkedIn must follow this spec.
 
-## Style: Dan Koe "Koe Letters" Inspired
+## Style: Handwritten "letters" inspired
 
 ### Overall Aesthetic
 - **Monochromatic palette:** Black, white, and grayscale only. No color. Creates a serious, timeless, intellectual tone.

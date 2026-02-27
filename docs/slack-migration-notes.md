@@ -120,7 +120,7 @@ The Slack plugin defaults to creating a session for **every channel and thread**
         enabled: true
       },
       allowlist: [
-        "C0123456789",  // #ops channel
+        "YOUR_OPS_CHANNEL_ID",  // ops channel
         "C9876543210",  // #engineering channel
         "U0ABCDEFGHI"   // Your user ID (for DMs)
       ],

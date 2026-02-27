@@ -3,7 +3,7 @@
 # Outputs context that should be reviewed before responding
 
 set -e
-CLAWD_DIR="${CLAWD_DIR:-/Users/danbot/clawd}"
+CLAWD_DIR="${CLAWD_DIR:-$HOME/clawd}"
 TODAY=$(date +%Y-%m-%d)
 YESTERDAY=$(date -v-1d +%Y-%m-%d 2>/dev/null || date -d "yesterday" +%Y-%m-%d)
 

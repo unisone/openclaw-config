@@ -1,7 +1,7 @@
 # Release v2026.02.17 - Production Hardening Guide
 
 **Release Date**: February 17, 2026
-**Author**: Alex Zaytsev ([@unisone](https://github.com/unisone))
+**Maintainers**: openclaw-config contributors
 **Type**: Major Feature Release
 
 ---
@@ -199,7 +199,7 @@ Comprehensive analysis of 8 production issues with:
 
 ## 🤝 Contributors
 
-- **Alex Zaytsev** ([@unisone](https://github.com/unisone)) - Author, research, implementation
+- **openclaw-config contributors** — research and implementation
 
 Special thanks to:
 - OpenClaw community for GitHub issue reports
@@ -271,7 +271,7 @@ If this release helped you:
 
 **Issues**: [GitHub Issues](https://github.com/unisone/openclaw-config/issues)
 **Discussions**: [GitHub Discussions](https://github.com/unisone/openclaw-config/discussions)
-**Author**: [Alex Zaytsev](https://github.com/unisone)
+**Maintainers**: openclaw-config contributors
 
 ---
 

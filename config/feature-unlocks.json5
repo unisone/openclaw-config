@@ -92,7 +92,7 @@
     exec: {
       defaultShell: "/bin/zsh",      // Default shell for exec commands
       timeout: 300,                   // Default timeout in seconds (5 min)
-      // workdir: "/Users/you/.openclaw/workspace"  // Default working directory
+      // workdir: "$HOME/.openclaw/workspace"  // Default working directory
     }
   },
 

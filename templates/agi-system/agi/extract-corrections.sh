@@ -3,7 +3,7 @@
 # Scans memory files for correction patterns and outputs structured learning
 
 set -e
-CLAWD_DIR="${CLAWD_DIR:-/Users/danbot/clawd}"
+CLAWD_DIR="${CLAWD_DIR:-$HOME/clawd}"
 OUTPUT_FILE="$CLAWD_DIR/.learnings/extracted-$(date +%Y-%m-%d).md"
 
 echo "# Extracted Corrections - $(date +%Y-%m-%d)" > "$OUTPUT_FILE"

@@ -1,14 +1,14 @@
 #!/bin/bash
 # OpenClaw Production Hardening - Automated Installer
 # Version: 2026.02.17
-# Author: Alex Zaytsev (@unisone)
+# Maintainers: openclaw-config contributors
 
 set -e
 
 echo "╔══════════════════════════════════════════════════════════════╗"
 echo "║  OpenClaw Production Hardening Installer                    ║"
 echo "║  Version: 2026.02.17                                         ║"
-echo "║  Author: Alex Zaytsev (@unisone)                             ║"
+echo "║  Maintainers: openclaw-config contributors                             ║"
 echo "╚══════════════════════════════════════════════════════════════╝"
 echo ""
 

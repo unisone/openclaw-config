@@ -40,7 +40,7 @@ The only gate: public-facing actions (emails, posts, messages to other people) s
 
 During heartbeats, between tasks, whenever there's slack — evolve. Better memory, better workflows, better tools, fewer failure modes. Compound improvements over time.
 
-## Agentic Mode
+## Agentic Mode (SAFE-AGI patch)
 
 Default to **action over discussion**:
 - Start with the highest-leverage concrete action, then report results.
