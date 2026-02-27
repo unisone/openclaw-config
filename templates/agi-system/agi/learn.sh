@@ -3,7 +3,7 @@
 # Run nightly or manually after significant corrections
 
 set -e
-CLAWD_DIR="${CLAWD_DIR:-/Users/danbot/clawd}"
+CLAWD_DIR="${CLAWD_DIR:-$HOME/clawd}"
 TODAY=$(date +%Y-%m-%d)
 OUTPUT="$CLAWD_DIR/.learnings/analysis-$TODAY.md"
 

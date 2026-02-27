@@ -389,10 +389,10 @@ $ ls -la ~/.openclaw/.env
 **Multi-user system exposure**:
 ```bash
 # As another user on same Mac:
-$ ls /Users/YOUR_USERNAME/.openclaw/
+$ ls $HOME/.openclaw/
 openclaw.json  logs/  agents/  # Can see everything!
 
-$ cat /Users/YOUR_USERNAME/.openclaw/openclaw.json
+$ cat $HOME/.openclaw/openclaw.json
 # Can read config (even if secrets are removed)
 ```
 

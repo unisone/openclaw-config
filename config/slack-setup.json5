@@ -37,7 +37,7 @@
       // Allowlisted channels (add your channel IDs here)
       // Find channel ID: right-click channel → View channel details → copy ID from bottom
       allowlist: [
-        // "C0123456789",  // #general
+        // "YOUR_GENERAL_CHANNEL_ID",  // #general
         // "C9876543210",  // #ops
         // "U0ABCDEFGHI",  // @your-user-id (for DMs)
       ],

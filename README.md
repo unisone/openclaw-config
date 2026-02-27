@@ -7,7 +7,7 @@
 <p align="center">
   Production-tested configs, scripts, and workspace templates for <a href="https://github.com/openclaw/openclaw">OpenClaw</a>.<br />
   Not an SDK — just copyable building blocks from a real daily-driver setup.<br />
-  <strong>Release v2026.02.17</strong> • Compatible with OpenClaw 2026.2.14+
+  <strong>Release v2026.02.27</strong> • Compatible with OpenClaw 2026.2.24+
 </p>
 
 <p align="center">
@@ -27,6 +27,10 @@
 
 <p align="center">
   <a href="#-new-production-hardening-guide">🚀 Production Hardening</a> •
+  <a href="#whats-new-in-v20260227">What's New</a> •
+  <a href="#session-management-suite">Session Management</a> •
+  <a href="#model-change-safety-rules">Model Safety</a> •
+  <a href="#agent-swarm-orchestration">Agent Swarm</a> •
   <a href="#quickstart">Quickstart</a> •
   <a href="#whats-included">What's Included</a> •
   <a href="#gateway-config-snippets">Configs</a> •
@@ -72,8 +76,57 @@ chmod +x install.sh
 ```
 
 **📖 Full Guide**: [production-hardening/README.md](./production-hardening/README.md)
-**📝 Release Notes**: [RELEASE-v2026.02.17.md](./RELEASE-v2026.02.17.md)
+**📝 Release Notes**: [RELEASE-v2026.02.27.md](./RELEASE-v2026.02.27.md)
 **🔍 Research**: [production-hardening/RESEARCH.md](./production-hardening/RESEARCH.md)
+
+---
+
+## What's New in v2026.02.27
+
+- **Session Management Suite** added under `scripts/session-management/`:
+  - `session-watchdog.sh`
+  - `session-metrics.sh`
+  - `session-ops-weekly-report.sh`
+  - `session-cleanup.sh`
+  - `session-store-hygiene.sh`
+- **Model Change Safety Rules** added: `docs/model-change-safety-rules.md`
+- **Agent Swarm Orchestration** guide added: `workflows/agent-swarm-orchestration.md`
+- **OpenClaw Cron Patterns** reference added: `workflows/openclaw-cron-patterns.md`
+- **Agent Conventions** added: `docs/agent-conventions.md`
+- **Refined templates** updated: `templates/AGENTS.md`, `templates/HEARTBEAT.md`, `templates/SOUL.md`
+
+## Session Management Suite
+
+A production-focused lifecycle toolkit for session stability and context hygiene.
+
+- **Autonomous watchdog** for stale/maxed session cleanup
+- **Metrics snapshots** for monitoring and alerting
+- **Weekly ops reporting** to persistent markdown logs
+- **Manual cleanup + store hygiene** scripts for incident response
+
+📄 Docs: [`scripts/session-management/README.md`](./scripts/session-management/README.md)
+
+## Model Change Safety Rules
+
+A hard safety checklist for switching models without breaking active sessions (especially Anthropic thinking-signature compatibility).
+
+- Pre-change checklist (contexts, thinking mode, fallback ordering)
+- Session-impact rules for shared vs isolated sessions
+- Post-change verification steps to catch signature errors early
+
+📄 Docs: [`docs/model-change-safety-rules.md`](./docs/model-change-safety-rules.md)
+
+## Agent Swarm Orchestration
+
+Reference architecture for running multi-agent work with routing, monitoring, review gates, and cleanup loops.
+
+- Smart routing + learning loop
+- Deterministic health checks + auto-respawn policies
+- Triple-review model and UI screenshot gate
+- Paired workflow docs for scheduling and cron operations
+
+📄 Orchestration: [`workflows/agent-swarm-orchestration.md`](./workflows/agent-swarm-orchestration.md)  
+📄 Cron patterns: [`workflows/openclaw-cron-patterns.md`](./workflows/openclaw-cron-patterns.md)
 
 ---
 
@@ -109,9 +162,10 @@ rsync -av skills/ ~/.openclaw/workspace/skills/
 | `skills/` | Workspace-level SKILL.md overrides that reduce misfires in overlapping domains |
 | `config/` | Gateway config snippets (JSON5) — compaction, pruning, model fallbacks, memory, search, Slack |
 | `scripts/memory-engine/` | Shell-based memory lifecycle: capture → recall → decay → learn + self-review |
+| **`scripts/session-management/`** ⭐ | Session lifecycle suite: watchdog, metrics, weekly ops report, cleanup, and store hygiene |
 | `scripts/taskrunner/` | Python task automation with retry logic, file locking, structured logging |
 | `agents/` | Multi-agent persona prompts (researcher, architect, security auditor, etc.) |
-| `docs/` | Operational guides — context overflow, agent memory research, skill routing, Slack migration, model fallback strategy |
+| `docs/` | Operational guides — context overflow, model-change safety rules, agent conventions, memory research, skill routing, Slack migration, model fallback strategy |
 | `content-pipeline/` | Optional cron-driven content workflow: draft → approve → post → metrics |
 
 ---
@@ -285,7 +339,7 @@ openclaw-config/
 ├── skills/                      # Workspace-level SKILL.md routing overrides
 ├── templates/                   # Workspace bootstrap files
 │   └── artifacts/               # Structured output directory convention
-└── workflows/                   # Optional Lobster workflows
+└── workflows/                   # Operational references + optional Lobster workflows
 ```
 
 ---

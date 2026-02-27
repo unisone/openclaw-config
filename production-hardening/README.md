@@ -1,7 +1,7 @@
 # Production Hardening Guide for OpenClaw
 
 **Version:** 2026.02.17
-**Author:** Alex Zaytsev ([@unisone](https://github.com/unisone))
+**Maintainers:** openclaw-config contributors
 **Status:** Community-Validated, Battle-Tested
 
 > **TL;DR**: Harden your OpenClaw setup to production-grade in 30 minutes. Addresses common issues found in default OpenClaw installations, based on real-world deployments and community research (GitHub issues #9627, #11202, #4632).
@@ -285,13 +285,9 @@ MIT License - See [LICENSE](../LICENSE)
 
 ---
 
-## 👤 Author
+## 👥 Maintainers
 
-**Alex Zaytsev**
-
-- GitHub: [@unisone](https://github.com/unisone)
-- LinkedIn: [linkedin.com/in/alexzay](https://linkedin.com/in/alexzay)
-- Email: your-email@example.com
+**openclaw-config contributors**
 
 *Built with production-grade standards. Battle-tested on real OpenClaw deployments.*
 

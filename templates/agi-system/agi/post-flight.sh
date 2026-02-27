@@ -3,7 +3,7 @@
 # Usage: post-flight.sh "task description" "outcome" ["error details"]
 
 set -e
-CLAWD_DIR="${CLAWD_DIR:-/Users/danbot/clawd}"
+CLAWD_DIR="${CLAWD_DIR:-$HOME/clawd}"
 TODAY=$(date +%Y-%m-%d)
 TIMESTAMP=$(date +%H:%M)
 MEMORY_FILE="$CLAWD_DIR/memory/$TODAY.md"
