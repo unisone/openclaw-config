@@ -15,9 +15,7 @@ A lightweight Python-based task runner for agent automation tasks.
 ### Run a Task
 
 ```bash
-python3 runner.py <task_name>
-# Or with absolute path:
-python3 ~/.openclaw/workspace/scripts/taskrunner/runner.py <task_name>
+python3 $HOME/.openclaw/workspace/scripts/taskrunner/runner.py <task_name>
 ```
 
 ### Dry Run Mode
@@ -167,7 +165,7 @@ Tasks can be scheduled via OpenClaw cron:
 openclaw cron add \
   --name "memory-consolidate-daily" \
   --schedule "0 3 * * *" \
-  --command "python3 ~/.openclaw/workspace/scripts/taskrunner/runner.py memory_consolidate"
+  --command "python3 $HOME/.openclaw/workspace/scripts/taskrunner/runner.py memory_consolidate"
 ```
 
 ## Requirements
@@ -179,10 +177,11 @@ openclaw cron add \
 
 ## File Locations
 
-Default workspace location: `~/.openclaw/workspace`
+All paths are absolute to support running from anywhere:
 
-- Task runner: `~/.openclaw/workspace/scripts/taskrunner/`
-- Memory store: `~/.openclaw/workspace/memory/store.json`
-- Daily files: `~/.openclaw/workspace/memory/YYYY-MM-DD.md`
-- Logs: `~/.openclaw/workspace/scripts/taskrunner/logs/`
-- Alerts: `~/.openclaw/workspace/scripts/taskrunner/alerts/`
+- Workspace: `$HOME/.openclaw/workspace`
+- Task runner: `$HOME/.openclaw/workspace/scripts/taskrunner/`
+- Memory store: `$HOME/.openclaw/workspace/memory/store.json`
+- Daily files: `$HOME/.openclaw/workspace/memory/YYYY-MM-DD.md`
+- Logs: `$HOME/.openclaw/workspace/scripts/taskrunner/logs/`
+- Alerts: `$HOME/.openclaw/workspace/scripts/taskrunner/alerts/`

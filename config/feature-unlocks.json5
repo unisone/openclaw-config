@@ -4,7 +4,7 @@
 // well-tested, and safe — but require you to understand what they do.
 //
 // These aren't experimental. They're production-ready features that power users want.
-// Running in production at github.com/unisone/openclaw-config since Feb 2026.
+// Running in production at github.com/YOUR_USERNAME/openclaw-config since Feb 2026.
 
 {
   agents: {

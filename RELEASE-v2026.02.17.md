@@ -269,8 +269,8 @@ If this release helped you:
 
 ## 📞 Support
 
-**Issues**: [GitHub Issues](https://github.com/unisone/openclaw-config/issues)
-**Discussions**: [GitHub Discussions](https://github.com/unisone/openclaw-config/discussions)
+**Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/openclaw-config/issues)
+**Discussions**: [GitHub Discussions](https://github.com/YOUR_USERNAME/openclaw-config/discussions)
 **Maintainers**: openclaw-config contributors
 
 ---

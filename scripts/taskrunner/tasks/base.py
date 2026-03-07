@@ -16,7 +16,7 @@ class Task(ABC):
         self.dry_run = dry_run
         self.start_time: Optional[float] = None
         self.end_time: Optional[float] = None
-        self._workspace = Path("~/.openclaw/workspace")
+        self._workspace = Path("$HOME/.openclaw/workspace")
         self._alerts_dir = self._workspace / "scripts/taskrunner/alerts"
     
     @property

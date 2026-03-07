@@ -425,4 +425,4 @@ You've successfully completed production hardening when:
 
 **Congratulations!** Your OpenClaw setup is now production-grade. 🦞🚀
 
-**Questions?** Open an issue: https://github.com/unisone/openclaw-config/issues
+**Questions?** Open an issue: https://github.com/YOUR_USERNAME/openclaw-config/issues

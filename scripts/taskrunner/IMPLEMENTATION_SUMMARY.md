@@ -147,7 +147,7 @@ A complete Python-based task runner infrastructure for agent automation, replaci
 
 5. **Alert queue pattern:** Tasks write alerts to `alerts/pending.json`. Heartbeat polls this file and posts to Slack, then clears it.
 
-6. **Absolute paths everywhere:** All paths are absolute (`~/.openclaw/workspace/...`) to support running from any directory.
+6. **Absolute paths everywhere:** All paths are absolute (`$HOME/.openclaw/workspace/...`) to support running from any directory.
 
 ## Integration Points
 
@@ -164,7 +164,7 @@ Tasks can be scheduled via OpenClaw cron:
 openclaw cron add \
   --name "memory-consolidate-daily" \
   --schedule "0 3 * * *" \
-  --command "python3 ~/.openclaw/workspace/scripts/taskrunner/runner.py memory_consolidate"
+  --command "python3 $HOME/.openclaw/workspace/scripts/taskrunner/runner.py memory_consolidate"
 ```
 
 ## Known Limitations
@@ -190,7 +190,7 @@ To verify the implementation:
 
 ```bash
 # Run test suite
-cd ~/.openclaw/workspace/scripts/taskrunner
+cd $HOME/.openclaw/workspace/scripts/taskrunner
 python3 test_all.py
 
 # Test individual tasks
