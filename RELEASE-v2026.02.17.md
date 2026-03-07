@@ -129,7 +129,7 @@ This release is based on:
 ### Option 1: Automated Install
 ```bash
 cd ~/.openclaw
-curl -O https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening/install.sh
+curl -O https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening/install.sh
 chmod +x install.sh
 ./install.sh
 ```
@@ -269,8 +269,8 @@ If this release helped you:
 
 ## 📞 Support
 
-**Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/openclaw-config/issues)
-**Discussions**: [GitHub Discussions](https://github.com/YOUR_USERNAME/openclaw-config/discussions)
+**Issues**: [GitHub Issues](https://github.com/unisone/openclaw-config/issues)
+**Discussions**: [GitHub Discussions](https://github.com/unisone/openclaw-config/discussions)
 **Maintainers**: openclaw-config contributors
 
 ---

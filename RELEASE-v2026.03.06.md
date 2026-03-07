@@ -101,7 +101,7 @@ Updated system design documentation:
 
 #### Core Configuration
 - `LICENSE` — Copyright holder updated to "OpenClaw Config Contributors"
-- `README.md` — URLs updated (generic placeholder: `github.com/YOUR_USERNAME/openclaw-config`)
+- `README.md` — URLs updated to use `github.com/unisone/openclaw-config`
 - `DEPLOY.md` — URLs updated
 - `RELEASE-v2026.02.17.md` — URLs updated
 
@@ -240,7 +240,7 @@ Output: `scripts/reel-pipeline/output/<timestamp>-<topic>/reel-final.mp4`
 ### Quick Install (Production Hardening)
 
 ```bash
-curl -O https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening/install.sh
+curl -O https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening/install.sh
 chmod +x install.sh
 ./install.sh
 ```
@@ -248,7 +248,7 @@ chmod +x install.sh
 ### Manual Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/openclaw-config.git
+git clone https://github.com/unisone/openclaw-config.git
 cd openclaw-config
 
 # Copy what you need:
@@ -291,8 +291,8 @@ Special thanks to contributors who identified path normalization issues and cont
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/openclaw-config/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/YOUR_USERNAME/openclaw-config/discussions)
+- **Issues**: [GitHub Issues](https://github.com/unisone/openclaw-config/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/unisone/openclaw-config/discussions)
 - **Docs**: [README](./README.md)
 
 ---
@@ -308,4 +308,4 @@ Special thanks to contributors who identified path normalization issues and cont
 ---
 
 **Free and open source:** [MIT License](./LICENSE)  
-**Repository:** https://github.com/YOUR_USERNAME/openclaw-config
+**Repository:** https://github.com/unisone/openclaw-config

@@ -33,3 +33,6 @@ alerts/
 *.swp
 *.swo
 *~
+.mailmap-rewrite
+.replacements.txt
+.replacements2.txt

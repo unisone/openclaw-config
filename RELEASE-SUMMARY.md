@@ -14,7 +14,7 @@
 - **LICENSE** — Copyright changed from "Alex Zay" → "OpenClaw Config Contributors"
 
 #### 2. GitHub Username (15+ files)
-- Replaced `github.com/unisone/openclaw-config` → `github.com/YOUR_USERNAME/openclaw-config`
+- Verified all URLs use `github.com/unisone/openclaw-config`
 - **Files affected:** README.md, DEPLOY.md, RELEASE-v2026.02.17.md, production-hardening/*, config/feature-unlocks.json5
 
 #### 3. Legacy Project Names
@@ -85,7 +85,7 @@
 1. **Hardcoded paths:** `/Users/zaytsev/.openclaw/workspace` → `$HOME/.openclaw/workspace`
 2. **Personal output:** Deleted `scripts/reel-pipeline/output/` (contained test videos with personal paths)
 3. **Legacy references:** All `clawdbot`/`moltbot` → `openclaw`
-4. **GitHub username:** All `unisone` → `YOUR_USERNAME` (generic placeholder)
+4. **GitHub username:** All URLs use `unisone` (repo owner)
 
 ### Verification
 - ✅ No personal emails found
@@ -93,7 +93,7 @@
 - ✅ No business identifiers found
 - ✅ No API keys found
 - ✅ No personal file paths found
-- ✅ All URLs generic (`YOUR_USERNAME` placeholder)
+- ✅ All URLs correct (`unisone/openclaw-config`)
 
 ---
 
@@ -151,7 +151,7 @@ git push origin release/v2026.03.06
 ```
 
 ### 4. Create Pull Request
-1. Go to: https://github.com/YOUR_USERNAME/openclaw-config
+1. Go to: https://github.com/unisone/openclaw-config
 2. Create PR: `release/v2026.03.06` → `main`
 3. Title: "Release v2026.03.06: STEPPS Quality Framework + Reel Pipeline"
 4. Body: Copy from `RELEASE-v2026.03.06.md`
@@ -165,7 +165,7 @@ git push origin main --tags
 ```
 
 ### 6. Create GitHub Release
-1. Go to: https://github.com/YOUR_USERNAME/openclaw-config/releases/new
+1. Go to: https://github.com/unisone/openclaw-config/releases/new
 2. Tag: `v2026.03.06`
 3. Title: "v2026.03.06 — STEPPS Quality Framework + Reel Pipeline"
 4. Body: Copy from `RELEASE-v2026.03.06.md`
@@ -181,7 +181,7 @@ git push origin main --tags
 | **Taskrunner** | Basic | Enhanced (delivery_audit, better error handling) |
 | **Architecture Docs** | V1 | V2 (updated design patterns) |
 | **Personal Data** | Some leaks | ✅ Fully sanitized |
-| **URL Placeholders** | `unisone` hardcoded | `YOUR_USERNAME` generic |
+| **URL Placeholders** | Mixed/broken | `unisone` everywhere |
 | **Legacy References** | `clawdbot`/`moltbot` | `openclaw` (normalized) |
 
 ---
@@ -229,7 +229,7 @@ What's new:
 
 Fully sanitized, generic placeholders, ready to fork.
 
-Free & open source: github.com/YOUR_USERNAME/openclaw-config
+Free & open source: github.com/unisone/openclaw-config
 ```
 
 ### LinkedIn Post
@@ -253,7 +253,7 @@ Updated design patterns based on production learnings and the latest multi-agent
 
 This release is fully sanitized (no personal data), uses generic placeholders, and is ready to fork and customize.
 
-Free & open source (MIT): github.com/YOUR_USERNAME/openclaw-config
+Free & open source (MIT): github.com/unisone/openclaw-config
 
 Full changelog: [link to release notes]
 ```

@@ -114,14 +114,14 @@ git push origin main
 git push origin v2026.02.17
 
 # Verify on GitHub
-echo "✅ View at: https://github.com/YOUR_USERNAME/openclaw-config/releases/tag/v2026.02.17"
+echo "✅ View at: https://github.com/unisone/openclaw-config/releases/tag/v2026.02.17"
 ```
 
 ---
 
 ## Create GitHub Release (Web UI)
 
-1. Go to: https://github.com/YOUR_USERNAME/openclaw-config/releases/new
+1. Go to: https://github.com/unisone/openclaw-config/releases/new
 
 2. **Choose tag**: `v2026.02.17`
 
@@ -167,7 +167,7 @@ Harden your AI agent setup for production in 30 minutes:
 ✅ Automated monitoring & backups
 ✅ 13K+ words of research & analysis
 
-Free & open source: https://github.com/YOUR_USERNAME/openclaw-config
+Free & open source: https://github.com/unisone/openclaw-config
 
 #AI #DevOps #OpenSource
 ```
@@ -190,7 +190,7 @@ The guide includes:
 • Production-tested configurations
 • Step-by-step implementation (60 min)
 
-Free and open source: https://github.com/YOUR_USERNAME/openclaw-config
+Free and open source: https://github.com/unisone/openclaw-config
 
 #AI #DevOps #OpenSource #ProductionEngineering
 ```

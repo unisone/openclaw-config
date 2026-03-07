@@ -11,7 +11,7 @@
 ### 2. GitHub Username - Multiple Files
 **Pattern**: `unisone` (personal GitHub username)
 **Files**:
-- `README.md`: Lines 14, 15, 17, 18, 20, 21, 23, 24, 73, 139 (URLs with github.com/YOUR_USERNAME/openclaw-config)
+- `README.md`: Lines 14, 15, 17, 18, 20, 21, 23, 24, 73, 139 (URLs with github.com/unisone/openclaw-config)
 - `DEPLOY.md`: Lines 117, 124, 170, 193
 - `RELEASE-v2026.02.17.md`: Lines 132, 272, 273
 - `production-hardening/IMPLEMENTATION.md`: Lines 110, 134, 157, 187, 222, 229, 428
@@ -20,7 +20,7 @@
 - `production-hardening/config/gitignore.template`: Line 2
 - `production-hardening/config/launchagent.plist`: Line 9
 - `config/feature-unlocks.json5`: Line 7
-**Fix**: Replace all `github.com/YOUR_USERNAME/openclaw-config` with `github.com/YOUR_USERNAME/openclaw-config` or generic placeholder
+**Fix**: Replace all `github.com/unisone/openclaw-config` with `github.com/unisone/openclaw-config` or generic placeholder
 
 ### 3. Personal Project Names - Legacy References
 **Pattern**: `moltbot`, `clawdbot`

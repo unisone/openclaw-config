@@ -57,7 +57,7 @@ These are **common issues in default OpenClaw installations** — if you're runn
 ### Option A: Automated Installation
 ```bash
 cd ~/.openclaw
-curl -O https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening/install.sh
+curl -O https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening/install.sh
 chmod +x install.sh
 ./install.sh
 ```
