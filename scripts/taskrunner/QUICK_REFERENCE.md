@@ -3,7 +3,7 @@
 ## Run a Task
 
 ```bash
-python3 ~/.openclaw/workspace/scripts/taskrunner/runner.py <task_name>
+python3 $HOME/.openclaw/workspace/scripts/taskrunner/runner.py <task_name>
 ```
 
 ## Available Tasks
@@ -82,12 +82,12 @@ Heartbeat reads this file, posts to Slack, then deletes it.
 
 ## File Locations
 
-- Runner: `~/.openclaw/workspace/scripts/taskrunner/runner.py`
-- Tasks: `~/.openclaw/workspace/scripts/taskrunner/tasks/*.py`
-- Logs: `~/.openclaw/workspace/scripts/taskrunner/logs/tasks.jsonl`
-- Alerts: `~/.openclaw/workspace/scripts/taskrunner/alerts/pending.json`
-- Memory store: `~/.openclaw/workspace/memory/store.json`
-- Daily files: `~/.openclaw/workspace/memory/YYYY-MM-DD.md`
+- Runner: `$HOME/.openclaw/workspace/scripts/taskrunner/runner.py`
+- Tasks: `$HOME/.openclaw/workspace/scripts/taskrunner/tasks/*.py`
+- Logs: `$HOME/.openclaw/workspace/scripts/taskrunner/logs/tasks.jsonl`
+- Alerts: `$HOME/.openclaw/workspace/scripts/taskrunner/alerts/pending.json`
+- Memory store: `$HOME/.openclaw/workspace/memory/store.json`
+- Daily files: `$HOME/.openclaw/workspace/memory/YYYY-MM-DD.md`
 
 ## Adding New Tasks
 

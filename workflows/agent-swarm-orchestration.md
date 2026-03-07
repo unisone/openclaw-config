@@ -73,7 +73,7 @@ UI PRs (touching .tsx/.jsx/.vue/.svelte/.css) without screenshots get an automat
 ## File Structure
 
 ```
-.clawdbot/
+.openclaw/workspace/
 ├── config.json              # Master config (repos, models, safety)
 ├── active-tasks.json        # Live task registry
 ├── README.md
@@ -101,33 +101,33 @@ UI PRs (touching .tsx/.jsx/.vue/.svelte/.css) without screenshots get an automat
 
 ### Spawn an agent (auto-routed)
 ```bash
-.clawdbot/scripts/spawn-agent.sh example-web-app feat/dark-mode "Add dark mode toggle"
+.openclaw/workspace/scripts/spawn-agent.sh example-web-app feat/dark-mode "Add dark mode toggle"
 # 🧠 Auto-routed: claude (claude-opus-4.5) — frontend task
 ```
 
 ### Spawn with specific agent
 ```bash
-.clawdbot/scripts/spawn-agent.sh example-api-service fix/auth-bug "Fix JWT refresh race condition" codex
+.openclaw/workspace/scripts/spawn-agent.sh example-api-service fix/auth-bug "Fix JWT refresh race condition" codex
 ```
 
 ### Check all agents
 ```bash
-.clawdbot/scripts/check-agents.sh
+.openclaw/workspace/scripts/check-agents.sh
 ```
 
 ### Run proactive scan
 ```bash
-.clawdbot/scripts/../scanning/scan-proactive.sh
+.openclaw/workspace/scripts/../scanning/scan-proactive.sh
 ```
 
 ### View status
 ```bash
-.clawdbot/scripts/status.sh
+.openclaw/workspace/scripts/status.sh
 ```
 
 ### Redirect a running agent
 ```bash
-tmux send-keys -t clawdbot-<task-id> "Stop. Focus on the API layer first." Enter
+tmux send-keys -t openclaw-<task-id> "Stop. Focus on the API layer first." Enter
 ```
 
 ## Cron Integration

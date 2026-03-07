@@ -107,7 +107,7 @@ ls -la ~/.openclaw/.env   # Should show: -rw-------
 ### Step 2.1: Update LaunchAgent Plist
 ```bash
 # Download template
-curl -sL https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening/config/launchagent.plist \
+curl -sL https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening/config/launchagent.plist \
   -o /tmp/launchagent.plist
 
 # Replace YOUR_USERNAME with your actual username
@@ -131,7 +131,7 @@ cp /tmp/launchagent.plist ~/Library/LaunchAgents/ai.openclaw.gateway.plist
 ```bash
 mkdir -p ~/.openclaw/scripts
 
-curl -sL https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening/scripts/rotate-logs.sh \
+curl -sL https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening/scripts/rotate-logs.sh \
   -o ~/.openclaw/scripts/rotate-logs.sh
 
 chmod +x ~/.openclaw/scripts/rotate-logs.sh
@@ -154,7 +154,7 @@ crontab -l | grep rotate-logs
 
 ### Step 4.1: Install Script
 ```bash
-curl -sL https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening/scripts/backup-config.sh \
+curl -sL https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening/scripts/backup-config.sh \
   -o ~/.openclaw/scripts/backup-config.sh
 
 chmod +x ~/.openclaw/scripts/backup-config.sh
@@ -184,7 +184,7 @@ ls -la ~/.openclaw/backups/daily/
 
 ### Step 5.1: Install Script
 ```bash
-curl -sL https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening/scripts/healthcheck.sh \
+curl -sL https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening/scripts/healthcheck.sh \
   -o ~/.openclaw/scripts/healthcheck.sh
 
 chmod +x ~/.openclaw/scripts/healthcheck.sh
@@ -219,14 +219,14 @@ git init
 
 ### Step 6.2: Add .gitignore
 ```bash
-curl -sL https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening/config/gitignore.template \
+curl -sL https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening/config/gitignore.template \
   -o .gitignore
 ```
 
 ### Step 6.3: Initial Commit
 ```bash
 git add openclaw.json .gitignore
-git commit -m "baseline production config (unisone/openclaw-config v2026.02.17)"
+git commit -m "baseline production config (YOUR_USERNAME/openclaw-config v2026.02.17)"
 git tag "production-$(date +%Y%m%d)"
 ```
 
@@ -425,4 +425,4 @@ You've successfully completed production hardening when:
 
 **Congratulations!** Your OpenClaw setup is now production-grade. 🦞🚀
 
-**Questions?** Open an issue: https://github.com/unisone/openclaw-config/issues
+**Questions?** Open an issue: https://github.com/YOUR_USERNAME/openclaw-config/issues

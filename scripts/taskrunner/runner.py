@@ -31,10 +31,7 @@ EXIT_LOCKED = 2
 class TaskRunner:
     """Main task runner orchestrator."""
     
-    def __init__(self, workspace_path: str = None):
-        if workspace_path is None:
-            # Default to ~/.openclaw/workspace if not specified
-            workspace_path = Path.home() / ".openclaw" / "workspace"
+    def __init__(self, workspace_path: str = "$HOME/.openclaw/workspace"):
         self.workspace = Path(workspace_path)
         self.taskrunner_dir = self.workspace / "scripts/taskrunner"
         self.logs_dir = self.taskrunner_dir / "logs"

@@ -17,8 +17,8 @@ fi
 # Check if OpenClaw config exists (with legacy fallbacks)
 CONFIG_CANDIDATES=(
   "$HOME/.openclaw/openclaw.json"
-  "$HOME/.clawdbot/clawdbot.json"
-  "$HOME/.clawdbot/moltbot.json"
+  "$HOME/.openclaw/openclaw.json"
+  "$HOME/.openclaw/openclaw.json"
 )
 
 CONFIG_PATH=""
@@ -62,7 +62,7 @@ mkdir -p logs
 # Create systemd service file (optional)
 if command -v systemctl &> /dev/null; then
     echo "🔧 Creating systemd service file..."
-    cat > /tmp/clawdbot-approval-gate.service << EOF
+    cat > /tmp/openclaw-approval-gate.service << EOF
 [Unit]
 Description=OpenClaw Posting Approval Gate
 After=network.target
@@ -80,11 +80,11 @@ Environment=NODE_ENV=production
 WantedBy=multi-user.target
 EOF
 
-    if sudo cp /tmp/clawdbot-approval-gate.service /etc/systemd/system/ 2>/dev/null; then
+    if sudo cp /tmp/openclaw-approval-gate.service /etc/systemd/system/ 2>/dev/null; then
         sudo systemctl daemon-reload
         echo "✅ Systemd service created. To enable:"
-        echo "   sudo systemctl enable clawdbot-approval-gate"
-        echo "   sudo systemctl start clawdbot-approval-gate"
+        echo "   sudo systemctl enable openclaw-approval-gate"
+        echo "   sudo systemctl start openclaw-approval-gate"
     else
         echo "⚠️  Could not create systemd service (no sudo access)"
     fi
