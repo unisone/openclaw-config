@@ -229,7 +229,7 @@ def render_text_on_frame(
     style_name: str = "body",
     beat_index: int = 0,
     total_beats: int = 4,
-    brand: str = "unisone.ai",
+    brand: str = "your-brand",
 ) -> "Image.Image":
     """Render bold white text centered in the IG-safe zone."""
     img = bg.copy()
