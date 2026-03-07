@@ -37,7 +37,7 @@ echo ""
 
 # Download scripts
 echo -e "${YELLOW}Downloading production scripts...${NC}"
-REPO_URL="https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening"
+REPO_URL="https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening"
 
 mkdir -p scripts
 

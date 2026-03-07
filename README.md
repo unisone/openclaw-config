@@ -12,16 +12,16 @@
 
 <p align="center">
   <a href="https://github.com/YOUR_USERNAME/openclaw-config/releases/latest">
-    <img src="https://img.shields.io/github/v/release/unisone/openclaw-config?style=flat-square&color=blue" alt="Latest Release" />
+    <img src="https://img.shields.io/github/v/release/YOUR_USERNAME/openclaw-config?style=flat-square&color=blue" alt="Latest Release" />
   </a>
   <a href="https://github.com/YOUR_USERNAME/openclaw-config/stargazers">
-    <img src="https://img.shields.io/github/stars/unisone/openclaw-config?style=flat-square&color=yellow" alt="GitHub Stars" />
+    <img src="https://img.shields.io/github/stars/YOUR_USERNAME/openclaw-config?style=flat-square&color=yellow" alt="GitHub Stars" />
   </a>
   <a href="https://github.com/YOUR_USERNAME/openclaw-config/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/unisone/openclaw-config?style=flat-square&color=green&v=2" alt="MIT License" />
+    <img src="https://img.shields.io/github/license/YOUR_USERNAME/openclaw-config?style=flat-square&color=green&v=2" alt="MIT License" />
   </a>
   <a href="https://github.com/YOUR_USERNAME/openclaw-config/commits/main">
-    <img src="https://img.shields.io/github/last-commit/unisone/openclaw-config?style=flat-square&color=orange" alt="Last Commit" />
+    <img src="https://img.shields.io/github/last-commit/YOUR_USERNAME/openclaw-config?style=flat-square&color=orange" alt="Last Commit" />
   </a>
 </p>
 
@@ -70,7 +70,7 @@ Based on critical GitHub issues and community findings, this guide addresses sec
 
 ```bash
 cd ~/.openclaw
-curl -O https://raw.githubusercontent.com/unisone/openclaw-config/main/production-hardening/install.sh
+curl -O https://raw.githubusercontent.com/YOUR_USERNAME/openclaw-config/main/production-hardening/install.sh
 chmod +x install.sh
 ./install.sh
 ```

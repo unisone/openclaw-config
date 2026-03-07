@@ -6,7 +6,7 @@
     <string>ai.openclaw.gateway</string>
 
     <key>Comment</key>
-    <string>OpenClaw Gateway - Production Config (unisone/openclaw-config)</string>
+    <string>OpenClaw Gateway - Production Config (YOUR_USERNAME/openclaw-config)</string>
 
     <key>RunAtLoad</key>
     <true/>
