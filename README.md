@@ -201,6 +201,14 @@ Based on OpenAI's [Shell + Skills + Compaction](https://openai.com) guidance —
 
 > Overrides mask bundled updates. When OpenClaw ships improved descriptions upstream, delete the override to fall back. Tracked in [openclaw/openclaw#14748](https://github.com/openclaw/openclaw/issues/14748).
 
+### Standalone skills
+
+New capabilities for the workspace (not overrides of bundled skills):
+
+| Skill | What it does |
+|-------|--------------|
+| `deep-research` | Multi-step web research with source tracking and cited findings |
+
 ---
 
 ## Gateway Config Snippets
@@ -371,4 +379,5 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 ## License
 
 [MIT](./LICENSE)
+
 
