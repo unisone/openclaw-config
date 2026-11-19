@@ -35,7 +35,7 @@
 - No Slack channel IDs (C0AE*) found
 - No Slack user IDs (U0AE*) found
 - No API keys/tokens hardcoded (BSA*, etc.)
-- No business identifiers (Meridian Freight, zaydream.com, etc.)
+- No business identifiers (company names, domains, etc.)
 - No JIRA references (zaydream.atlassian.net, KAN-*, account IDs)
 - No IP addresses (192.168.64.2)
 - No personal file paths (/Users/zaytsev, /Users/danbot)

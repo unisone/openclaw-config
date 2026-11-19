@@ -27,7 +27,7 @@
 ### ✅ Clean (No Issues Found)
 - No Slack channel/user IDs
 - No API keys/tokens (BSA*, etc.)
-- No business identifiers (Meridian, zaydream.com, etc.)
+- No business identifiers (company names, domains, etc.)
 - No JIRA references
 - No IP addresses (192.168.64.2)
 - No personal file paths
